@@ -25,6 +25,7 @@ const {Task}=require("./src/apicalls/helpers/task");
 
 const defaults=require("./src/enums/defaults");
 const streamtypes=require("./src/enums/streamtypes");
+const covercontexts=require("./src/enums/covercontexts");
 
 class APIClient{
 
@@ -130,7 +131,6 @@ class APIClient{
                 }).join('&');
             }
         }
-        console.log(verb.toUpperCase()+": "+url);
         return(new Promise(function(resolve,reject){
             var status=0;
 
@@ -199,4 +199,4 @@ class APIClient{
     }
 }
 
-module.exports={APIClient, APIResult, MetaData, Paging, UploadHandler, MediaCall, CustomCall, SystemCall, DomainCall, SessionCall, ProcessingCall,StatisticsCall, MediaManagementCall, DomainManagementCall, Task, streamtypes};
+module.exports={APIClient, APIResult, MetaData, Paging, UploadHandler, MediaCall, CustomCall, SystemCall, DomainCall, SessionCall, ProcessingCall,StatisticsCall, MediaManagementCall, DomainManagementCall, Task, streamtypes, covercontexts};

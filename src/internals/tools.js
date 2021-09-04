@@ -29,7 +29,6 @@ class Tools{
 	}
 
 	static isMediaCall(endpoint){
-		console.log(endpoint);
 		return((!this.isDomainCall(endpoint))&&(!this.isManageCall(endpoint))&&(!this.isSessionCall(endpoint))&&(!this.isStatisticsCall(endpoint))&&(!this.isSystemCall(endpoint))&&(!this.isProcessingCall(endpoint)));
 	}
 

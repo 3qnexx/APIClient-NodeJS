@@ -2,6 +2,8 @@
 
 const {DomainCall} = require("../apicalls/domaincall");
 const {MediaManagementCall} = require("../apicalls/mediamanagementcall");
+const streamtypes=require("../enums/streamtypes");
+const covercontexts=require("../enums/covercontexts");
 
 const fs = require("fs");
 const path = require('path');
@@ -48,7 +50,7 @@ class UploadHandler{
     }
 
     async uploadMedia(localPath,streamtype,useQueue=true,autoPublish=null,refnr="",queueStart=0,asVariantFor="",asVariantOf=0){
-        let mediaid=0;
+        let media=null;
         if(this.#apiclient){
             if(!useQueue){
                 this.#apiclient.setTimeout(300);
@@ -64,9 +66,7 @@ class UploadHandler{
                         uploadcall.getParameters().set("filename",path.basename(localPath));
                         let uploadresult=await this.#apiclient.call(uploadcall);
                         if(uploadresult.isSuccess()){
-                            console.log(uploadresult.getResult());
-                            console.log(uploadresult.getResultObject());
-                            mediaid=uploadresult.getResultObject().getGeneratedID();
+                            media=uploadresult;
                         }else{
                             throw new Error("internal Error.");
                         }
@@ -82,8 +82,140 @@ class UploadHandler{
         }else{
             throw new Error("APIClient must be configured and ready.");
         }
-        return(mediaid);
+        return(media);
     }
+
+    async replaceMedia(localPath,streamtype=streamtypes.VIDEO,mediaid=0){
+		let isSuccess=false;
+        if(this.#apiclient){
+			if((localPath)&&(fs.existsSync(localPath))){
+				if(mediaid>0){
+					let config=await this.#getConfig(localPath);
+					if(config){
+                        let azureupload=await this.#doUpload(localPath,config);
+                        if(azureupload){
+                            let uploadcall=new MediaManagementCall();
+                            uploadcall.setItem(mediaid,streamtype);
+                            uploadcall.updateItemFile(config.endpoint+"/"+config.file);
+                            let uploadresult=await this.#apiclient.call(uploadcall);
+                            if(uploadresult.isSuccess()){
+                                isSuccess=true;
+                            }else{
+                                throw new Error("internal Error.");
+                            }
+                        }else{
+                            throw new Error("internal error.");
+                        }
+					}else{
+						throw new Error("internal error.");
+					}
+				}else{
+					throw new Error("Media ID cant be empty.");
+				}
+			}else{
+				throw new Error("given Path must exist.");
+			}
+		}else{
+			throw new Error("APIClient must be configured and ready.");
+		}
+		return(isSuccess);
+	}
+
+    setMediaCover(localPath,streamtype=streamtypes.VIDEO,mediaid=0,coverContext=covercontexts.COVER){
+		let isSuccess=false;
+        if(this.#apiclient){
+			if((localPath)&&(fs.existsSync(localPath))){
+				if(mediaid>0){
+					let config=await this.#getConfig(localPath);
+					if(config){
+						let azureupload=await this.#doUpload(localPath,config);
+						if(azureupload){
+							let url=config.endpoint+"/"+config.file;
+                            let uploadcall=new MediaManagementCall();
+                            uploadcall.setItem(mediaid,streamtype);
+
+							switch(coverContext){
+								case covercontexts,COVER:
+									uploadcall.setItemCover(url);
+								break;
+								case covercontexts.ALTERNATIVE:
+									uploadcall.setItemCoverAlternative(url);
+								break;
+								case covercontexts.ABTEST:
+									uploadcall.setItemCoverABTest(url);
+								break;
+								case covercontexts.ACTIONSHOT:
+									uploadcall.setItemCoverActionShot(url);
+								break;
+								case covercontexts.BANNER:
+									uploadcall.setItemCoverBanner(url);
+								break;
+								case covercontexts.QUAD:
+									uploadcall.setItemCoverQuad(url);
+								break;
+								case covercontexts.FAMILYSAFE:
+									uploadcall.setItemCoverFamilySafe(url);
+								break;
+							}
+							let uploadresult=await this.#apiclient.call(uploadcall);
+                            if(uploadresult.isSuccess()){
+                                isSuccess=true;
+                            }else{
+                                throw new Error("internal Error.");
+                            }
+						}else{
+							throw new Error("internal error.");
+						}
+					}else{
+						throw new Error("internal error.");
+					}
+				}else{
+					throw new Error("Media ID cant be empty.");
+				}
+			}else{
+				throw new Error("given Path must exist.");
+			}
+		}else{
+			throw new Error("APIClient must be configured and ready.");
+		}
+		return(isSuccess);
+	}
+
+    addMediaCaptions(localPath,streamtype=streamtypes.VIDEO,mediaid=0,language='',withAudioDescription=false){
+		let isSuccess=true;
+        if(this.#apiclient){
+			if((localPath)&&(fs.existsSync(localPath))){
+				if(mediaid>0){
+                    let config=await this.#getConfig(localPath);
+					if(config){
+                        let azureupload=await this.#doUpload(localPath,config);
+						if(azureupload){
+                            let uploadcall=new MediaManagementCall();
+                            uploadcall.setItem(mediaid,streamtype);
+                            uploadcall.addCaptionsFromURL(config.endpoint+"/"+config.file,language,"",withAudioDescription);
+                            let uploadresult=await this.#apiclient.call(uploadcall);
+                            if(uploadresult.isSuccess()){
+                                isSuccess=true;
+                            }else{
+                                throw new Error("internal Error.");
+                            }
+                        }else{
+                            throw new Error("internal error.");
+                        }
+					}else{
+						throw new Error("internal error.");
+					}
+				}else{
+					throw new Error("Media ID cant be empty.");
+				}
+			}else{
+				throw new Error("given Path must exist.");
+			}
+		}else{
+			throw new Error("APIClient must be configured and ready.");
+		}
+		return(isSuccess);
+	}
     
 }
 
