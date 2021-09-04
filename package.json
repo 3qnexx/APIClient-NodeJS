@@ -1,0 +1,28 @@
+{
+  "name": "nexxomnia-api-node",
+  "version": "1.0.0",
+  "description": "The nexxOMNIA API Client for NodeJS",
+  "keywords": [
+    "3q",
+    "3q nexx",
+    "nexxOMNIA",
+    "nexxtv",
+    "omnia"
+  ],
+  "homepage": "https://3q.video/nexx-for-publishers",
+  "author": "3Q nexx GmbH",
+  "license": "ISC",
+  "main": "apiclient.js",
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {
+    "@azure/storage-blob": "^12.7.0",
+    "abort-controller": "^3.0.0",
+    "date-and-time": "^2.0.0",
+    "md5": "^2.3.0",
+    "node-fetch": "2.6.*",
+    "path": "^0.12.7"
+  }
+}

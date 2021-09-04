@@ -1,0 +1,199 @@
+"use strict";
+
+const {Modifiers}=require("../../internals/modifiers");
+const captionformats=require("../../enums/captionformats");
+const connectedmediadetails=require("../../enums/connectedmediadetails");
+
+class MediaModifiers extends Modifiers{
+
+    constructor(){
+        super();
+    }
+
+	addGeoDetails(){
+		this._params['addGeoDetails']=1;
+	}
+
+	addAuthorDetails(){
+		this._params['addAuthorDetails']=1;
+	}
+
+	addStreamDetails(){
+		this._params['addStreamDetails']=1;
+	}
+
+	addEmbedDetails(){
+		this._params['addEmbedDetails']=1;
+	}
+
+	addStatusDetails(){
+		this._params['addStatusDetails']=1;
+	}
+
+	addRestrictionDetails(){
+		this._params['addRestrictionDetails']=1;
+	}
+
+	addItemDetails(){
+		this._params['addItemDetails']=1;
+	}
+
+	addFaceDetails(){
+		this._params['addFaceDetails']=1;
+	}
+
+	addPodcastDetails(){
+		this._params['addPodcastDetails']=1;
+	}
+
+	addRenditionDetails(){
+		this._params['addRenditionDetails']=1;
+	}
+
+	addTranscodingDetails(){
+		this._params['addTranscodingDetails']=1;
+	}
+
+	addIngestDetails(){
+		this._params['addIngestDetails']=1;
+	}
+
+	addInteractionOptions(){
+		this._params['addInteractionOptions']=1;
+	}
+
+	addConnectedMedia(options='all',connectedMediaDetails=""){
+		if(Array.isArray(options)){
+			options=options.join(',');
+		}
+		this._params['addConnectedMedia']=options;
+		if(connectedMediaDetails!=""){
+			if(connectedmediadetails.getAllTypes().includes(connectedMediaDetails)){
+				this._params['connectedMediaDetails']=connectedMediaDetails;
+			}else{
+				throw new Error("Detail Level is unknown");
+			}
+		}
+	}
+
+	addComments(onlyFromLoggedInUser=false){
+		this._params['addComments']=1;
+		if(onlyFromLoggedInUser){
+			this._params['addCommentsFromLoggedinUserOnly']=1;
+		}
+	}
+
+	addAnnotations(){
+		this._params['addAnnotations']=1;
+	}
+
+	addStatistics(){
+		this._params['addStatistics']=1;
+	}
+
+	addPaymentData(){
+		this._params['addPaymentData']=1;
+	}
+
+	addParentReferences(){
+		this._params['addParentReferences']=1;
+	}
+
+	addTranslations(){
+		this._params['addTranslations']=1;
+	}
+
+	addItemData(){
+		this._params['addItemData']=1;
+	}
+
+	addCustomAttributes(){
+		this._params['addCustomAttributes']=1;
+	}
+
+	addExportDetails(){
+		this._params['addExportDetails']=1;
+	}
+
+	addPreviewLinks(){
+		this._params['addPreviewLinks']=1;
+	}
+
+	addBroadcastLinks(){
+		this._params['addBroadcastLinks']=1;
+	}
+
+	addFileURLs(){
+		this._params['addFileURLs']=1;
+	}
+
+	addStreamingURLs(){
+		this._params['addStreamingURLs']=1;
+	}
+
+	addFeatures(){
+		this._params['addFeatures']=1;
+	}
+
+	addInsights(options='all'){
+		if(Array.isArray(options)){
+			options=options.join(',');
+		}
+		this._params['addInsights']=options;
+	}
+
+	addScenes(){
+		this._params['addScenes']=1;
+	}
+
+	addChapters(){
+		this._params['addChapters']=1;
+	}
+
+	addHotSpots(){
+		this._params['addHotSpots']=1;
+	}
+
+	addCaptions(format){
+		if(captionformats.getAllTypes().includes(format)){
+			this._params['addCaptions']=format;
+		}else{
+			throw new Error("CaptionFormat string is unknown");
+		}
+	}
+
+	addBumpers(){
+		this._params['addBumpers']=1;
+	}
+
+	addVariantDetails(){
+		this._params['addVariantDetails']=1;
+	}
+
+	//only valid for Persons
+	addTaggedImages(){
+		this._params['addTaggedImages']=1;
+	}
+
+	//only valid for Persons
+	addTaggedVideos(){
+		this._params['addTaggedVideos']=1;
+	}
+
+	//only valid for Series
+	addSeasonList(){
+		this._params['addSeasonList']=1;
+	}
+
+	//only valid for Series
+	addEpisodesForSeason(season){
+		if(season=='latest'){
+			this._params['addEpisodesForSeason']=season;
+		}else if(Number.isInteger(season)){
+			this._params['addEpisodesForSeason']=season;
+		}
+	}
+
+}
+
+module.exports={MediaModifiers};
