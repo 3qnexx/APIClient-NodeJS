@@ -3,7 +3,7 @@
 const packageDetails=require('./package.json');
 const fetch=require("node-fetch");
 const AbortController=require("abort-controller");
-const md5=require("md5");
+const crypto=require("crypto");
 
 const {UploadHandler}=require("./src/uploadhandler/uploadhandler");
 
@@ -85,7 +85,7 @@ class APIClient{
 
     #buildToken(path){
         let parts=path.split("/");
-        return(md5(parts[1]+this.#domain+this.#secret));
+        return(crypto.createHash("md5").update(parts[1]+this.#domain+this.#secret).digest("hex"));
     }
 
     #buildHost(){

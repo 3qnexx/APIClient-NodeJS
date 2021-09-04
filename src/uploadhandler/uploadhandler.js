@@ -121,7 +121,7 @@ class UploadHandler{
 		return(isSuccess);
 	}
 
-    setMediaCover(localPath,streamtype=streamtypes.VIDEO,mediaid=0,coverContext=covercontexts.COVER){
+    async setMediaCover(localPath,streamtype=streamtypes.VIDEO,mediaid=0,coverContext=covercontexts.COVER){
 		let isSuccess=false;
         if(this.#apiclient){
 			if((localPath)&&(fs.existsSync(localPath))){
@@ -181,7 +181,7 @@ class UploadHandler{
 		return(isSuccess);
 	}
 
-    addMediaCaptions(localPath,streamtype=streamtypes.VIDEO,mediaid=0,language='',withAudioDescription=false){
+    async addMediaCaptions(localPath,streamtype=streamtypes.VIDEO,mediaid=0,language='',withAudioDescription=false){
 		let isSuccess=true;
         if(this.#apiclient){
 			if((localPath)&&(fs.existsSync(localPath))){

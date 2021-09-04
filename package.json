@@ -21,7 +21,6 @@
     "@azure/storage-blob": "^12.7.0",
     "abort-controller": "^3.0.0",
     "date-and-time": "^2.0.0",
-    "md5": "^2.3.0",
     "node-fetch": "2.6.*",
     "path": "^0.12.7"
   }
