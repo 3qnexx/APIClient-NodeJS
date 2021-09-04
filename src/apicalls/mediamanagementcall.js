@@ -809,6 +809,15 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
+	connectFileToItem(fileID=0){
+		if(fileID>0){
+			this._verb=defaults.VERB_PUT;
+			this.#method="connectfile/"+fileID;
+		}else{
+			throw new Error("the ID of the File must be given.");
+		}
+	}
+
 	connectPersonToItem(personID=0){
 		if(personID>0){
 			this._verb=defaults.VERB_PUT;
@@ -845,12 +854,30 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
+	connectProductToItem(productID=0){
+		if(productID>0){
+			this._verb=defaults.VERB_PUT;
+			this.#method="connectproduct/"+productID;
+		}else{
+			throw new Error("the ID of the Product must be given.");
+		}
+	}
+
 	removeLinkFromItem(linkID=0){
 		if(linkID>0){
 			this._verb=defaults.VERB_DELETE;
 			this.#method="removelink/"+linkID;
 		}else{
 			throw new Error("the ID of the Link must be given.");
+		}
+	}
+
+	removeFileFromItem(fileID=0){
+		if(fileID>0){
+			this._verb=defaults.VERB_DELETE;
+			this.#method="removefile/"+fileID;
+		}else{
+			throw new Error("the ID of the File must be given.");
 		}
 	}
 
@@ -887,6 +914,15 @@ class MediaManagementCall extends APICall{
 			this.#method="removeplace/"+placeID;
 		}else{
 			throw new Error("the ID of the Place must be given.");
+		}
+	}
+
+	removeProductFromItem(productID=0){
+		if(productID>0){
+			this._verb=defaults.VERB_DELETE;
+			this.#method="removeproduct/"+productID;
+		}else{
+			throw new Error("the ID of the Product must be given.");
 		}
 	}
 
