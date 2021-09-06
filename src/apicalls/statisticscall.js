@@ -193,6 +193,7 @@ class StatisticsCall extends APICall{
 	itemlist(kpi){
 		if(kpis.getAllTypes().includes(kpi)){
 			this._path+="itemlist";
+			this.getParameters().set("kpi",kpi);
 		}else{
 			throw new Error("KPI not supported");
 		}
