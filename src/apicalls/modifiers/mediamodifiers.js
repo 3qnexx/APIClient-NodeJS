@@ -3,6 +3,7 @@
 const {Modifiers}=require("../../internals/modifiers");
 const captionformats=require("../../enums/captionformats");
 const connectedmediadetails=require("../../enums/connectedmediadetails");
+const commentcontexts=require("../../enums/commentcontexts");
 
 class MediaModifiers extends Modifiers{
 
@@ -76,10 +77,11 @@ class MediaModifiers extends Modifiers{
 		}
 	}
 
-	addComments(onlyFromLoggedInUser=false){
-		this._params['addComments']=1;
-		if(onlyFromLoggedInUser){
-			this._params['addCommentsFromLoggedinUserOnly']=1;
+	addComments(context='all'){
+		if(commentcontexts.getAllTypes().includes(context)){
+			this._params['addComments']=context;
+		}else{
+			throw new Error("Comment Contetx is unknown");
 		}
 	}
 
