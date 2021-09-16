@@ -15,6 +15,7 @@ const highlightvideopurposes=require("../enums/highlightvideopurposes");
 const topicitemsources=require("../enums/topicitemsources");
 const querymodes=require("../enums/querymodes");
 const externalplatforms=require("../enums/externalplatforms");
+const liveplaybackstates=require("../enums/liveplaybackstates");
 
 class MediaManagementCall extends APICall{
 
@@ -603,6 +604,29 @@ class MediaManagementCall extends APICall{
 			this.#method="archive";
 		}else{
 			throw new Error("Streamtype must be video");
+		}
+	}
+
+	terminateStream(){
+		if([streamtypes.LIVE].includes(this.#streamtype)){
+			this._verb=defaults.VERB_POST;
+			this.#method="terminate";
+		}else{
+			throw new Error("Streamtype must be live");
+		}
+	}
+
+	updatePlaybackState(state){
+		if([streamtypes.LIVE].includes(this.#streamtype)){
+			if(liveplaybackstates.getAllTypes().includes(state)){
+				this._verb=defaults.VERB_POST;
+				this.#method="updateplaybackstate";
+				this.getParameters().set('state',state);
+			}else{
+				throw new Error("Live PlaybackState must be in on,pause");
+			}
+		}else{
+			throw new Error("Streamtype must be live");
 		}
 	}
 

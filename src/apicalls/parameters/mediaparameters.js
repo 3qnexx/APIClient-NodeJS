@@ -223,12 +223,20 @@ class MediaParameters extends Parameters{
 		this._params['includeTrailers']=(include?1:0);
 	}
 
-	includeBonus(include,onlyBonus=FALSE){
+	includeBonus(include,onlyBonus=false){
 		if(onlyBonus){
 			include=1;
 			this._params['onlyBonus']=1;
 		}
 		this._params['includeBonus']=(include?1:0);
+	}
+
+	includeLiveRepresentations(include,onlyRepresentations=false){
+		if(onlyRepresentations){
+			include=1;
+			this._params['onlyLiveRepresentations']=1;
+		}
+		this._params['includeLiveRepresentations']=(include?1:0);
 	}
 
 	includePremieres(include){
