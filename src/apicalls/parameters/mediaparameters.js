@@ -125,6 +125,12 @@ class MediaParameters extends Parameters{
 		this._params['type']=type;
 	}
 
+	//only valid for VIDEO and IMAGE
+	restrictToContentType(type){
+		this._params['contentType']=type;
+	}
+
+	//only valid for SCENE and LINK
 	restrictToPurpose(purpose){
 		this._params['purpose']=purpose;
 	}
@@ -153,7 +159,7 @@ class MediaParameters extends Parameters{
 		}
 	}
 
-	//only valid for COLLECTIONS // ALLMEDIA
+	//only valid for COLLECTIONS or ALLMEDIA
 	restrictToStreamtypes(list){
 		if(Array.isArray(list)){
 			this._params['selectedStreamtypes']=list.join(",");
