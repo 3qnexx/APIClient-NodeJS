@@ -2,7 +2,8 @@
 
 const types={
     ON:'on',
-    PAUSE:'pause'
+    PAUSE:'pause',
+    END:'end'
 };
 
 function getAllTypes(){
