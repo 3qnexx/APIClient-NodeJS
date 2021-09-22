@@ -9,7 +9,7 @@ const types={
     PRESENTATION:'presentation',
     ENDLESS:'endless',
     PREMIERE:'premiere',
-    AUTORECORDING:'autorecording',
+    RELIVE:'relive',
     MINI:'mini',
     MICRO:'micro',
     HERO:'hero'

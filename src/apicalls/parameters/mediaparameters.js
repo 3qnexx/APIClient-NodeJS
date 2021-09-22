@@ -249,8 +249,8 @@ class MediaParameters extends Parameters{
 		this._params['includePremieres']=(include?1:0);
 	}
 
-	includeAutoRecordings(include){
-		this._params['includeAutoRecordings']=(include?1:0);
+	includeReLive(include){
+		this._params['includeReLive']=(include?1:0);
 	}
 
 	includeEpisodes(include,onlyEpisodes=false){
