@@ -39,6 +39,10 @@ class MediaModifiers extends Modifiers{
 		this._params['addItemDetails']=1;
 	}
 
+	addAwards(){
+		this._params['addAwards']=1;
+	}
+
 	addFaceDetails(){
 		this._params['addFaceDetails']=1;
 	}
