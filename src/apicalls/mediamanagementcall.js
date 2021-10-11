@@ -1,6 +1,7 @@
 "use strict";
 
 const {APICall}=require("../internals/apicall");
+const tools=require("../internals/tools");
 const defaults=require("../enums/defaults");
 const streamtypes=require("../enums/streamtypes");
 const exportparts=require("../enums/exportparts");
@@ -16,6 +17,8 @@ const topicitemsources=require("../enums/topicitemsources");
 const querymodes=require("../enums/querymodes");
 const externalplatforms=require("../enums/externalplatforms");
 const liveplaybackstates=require("../enums/liveplaybackstates");
+const awardstates=require("../enums/awardstates");
+const hotspottypes=require("../enums/hotspottypes");
 
 class MediaManagementCall extends APICall{
 
@@ -24,10 +27,10 @@ class MediaManagementCall extends APICall{
 	#item=0;
 
 	constructor(){
-        super();
-    }
+		super();
+	}
 
-	
+
 	getPath(){
 		this._path="manage/"+streamtypes.getPluralizedStreamtype(this.#streamtype)+"/"+(this.#item>0?this.#item+"/":"")+this.#method;
 		return(super.getPath());
@@ -570,7 +573,7 @@ class MediaManagementCall extends APICall{
 					this.getParameters().set("autoorderdirection",autoOrderDirection);
 				}
 			}else{
-				throw new Error("an itemlist or a valid autoOrder String must be given");
+				throw new Error("an itemlist or a valid autoOrder must be given");
 			}
 		}else{
 			throw new Error("only Container Elements can be reordered.");
@@ -673,7 +676,7 @@ class MediaManagementCall extends APICall{
 				if(postImage){
 					this.getParameters().set("postImage",postImage);
 				}
-				 if((this.#streamtype==streamtypes.ARTICLE)&&(postWithLink)){
+				if((this.#streamtype==streamtypes.ARTICLE)&&(postWithLink)){
 					this.getParameters().set("postWithLink",1);
 				}
 			}else{
@@ -1108,6 +1111,207 @@ class MediaManagementCall extends APICall{
 			this.getParameters().set("language",language);
 		}else{
 			throw new Error("Language must be given in 2-Letter-Code");
+		}
+	}
+
+	addHotSpot(type,from,to, title,subtitle="",link="",detailTitle="",detailText="",autoPosition=true, xPos=0,yPos=0, maxWidth=0,linkedVideo=0,showCover=true,imageURL="",seekTarget=0){
+		if((type)&&(hotspottypes.getAllTypes().includes(type))){
+			this._verb=defaults.VERB_POST;
+			this.#method="addhotspot";
+			this.getParameters().set("type",type);
+			if(from){
+				this.getParameters().set("from",from);
+			}
+			if(to){
+				this.getParameters().set("to",to);
+			}
+			if(title){
+				this.getParameters().set("title",title);
+			}
+			if(autoPosition){
+				this.getParameters().set("autoPosition",1);
+			}else{
+				this.getParameters().set("autoPosition",0);
+				this.getParameters().set("xPos",xPos);
+				this.getParameters().set("yPos",yPos);
+			}
+			if(type==hotspottypes.LINK){
+				if(link){
+					this.getParameters().set("link",link);
+				}else{
+					throw new Error("A HotSpot of Type 'link' must have a link Target");
+				}
+			}
+			if(type==hotspottypes.VIDEO){
+				if(linkedVideo){
+					this.getParameters().set("linkedVideo",linkedVideo);
+					this.getParameters().set("showCover",(showCover?1:0));
+				}else{
+					throw new Error("A HotSpot of Type 'video' must have a linkedVideo");
+				}
+			}
+			if(type==hotspottypes.SEEK){
+				if(seekTarget){
+					this.getParameters().set("seekTarget",seekTarget);
+				}else{
+					throw new Error("A HotSpot of Type 'seek' must have a seekTarget");
+				}
+			}
+			if(type==hotspottypes.BANNER){
+				if(imageURL){
+					this.getParameters().set("imageURL",imageURL);
+					if(maxWidth){
+						this.getParameters().set("maxWidth",maxWidth);
+					}
+					if(link){
+						this.getParameters().set("link",link);
+					}
+				}else{
+					throw new Error("A HotSpot of Type 'banner' must give an imageURL");
+				}
+			}
+			if(type==hotspottypes.INTERSTITIAL){
+				if(detailTitle){
+					this.getParameters().set("detailTitle",detailTitle);
+				}
+				if(detailText){
+					this.getParameters().set("detailText",detailText);
+				}else{
+					throw new Error("A HotSpot of Type 'interstitial' must have a detailText");
+				}
+			}else if(subtitle){
+				this.getParameters().set("subtitle",subtitle);
+			}
+		}else{
+			throw new Error("Type must be in "+hotspottypes.getAllTypes().join(", "));
+		}
+	}
+
+	updateHotSpot(hotspotid,from=0,to=0, title="",subtitle="",link="",detailTitle="",detailText="",autoPosition=true, xPos=0,yPos=0, maxWidth=0,linkedVideo=0,showCover=true,imageURL="",seekTarget=0){
+		if(hotspotid){
+			this._verb=defaults.VERB_PUT;
+			this.#method="updatehotspot";
+			this.getParameters().set("hotspotid",hotspotid);
+			if(from){
+				this.getParameters().set("from",from);
+			}
+			if(to){
+				this.getParameters().set("to",to);
+			}
+			if(title){
+				this.getParameters().set("title",title);
+			}
+			if(subtitle){
+				this.getParameters().set("subtitle",subtitle);
+			}
+			if(link){
+				this.getParameters().set("link",link);
+			}
+			if(detailTitle){
+				this.getParameters().set("detailTitle",detailTitle);
+			}
+			if(detailText){
+				this.getParameters().set("detailText",detailText);
+			}
+			if(xPos){
+				this.getParameters().set("xPos",xPos);
+			}
+			if(yPos){
+				this.getParameters().set("yPos",yPos);
+			}
+			if(maxWidth){
+				this.getParameters().set("maxWidth",maxWidth);
+			}
+			if(linkedVideo){
+				this.getParameters().set("linkedVideo",linkedVideo);
+			}
+			if(imageURL){
+				this.getParameters().set("imageURL",imageURL);
+			}
+			if(seekTarget){
+				this.getParameters().set("seekTarget",seekTarget);
+			}
+			this.getParameters().set("autoPosition",(autoPosition?1:0));
+			this.getParameters().set("showCover",(showCover?1:0));
+		}else{
+			throw new Error("HotSpot ID cant be empty");
+		}
+	}
+
+	removeHotSpot(hotspotid){
+		if(hotspotid){
+			this._verb=defaults.VERB_DELETE;
+			this.#method="removehotspot";
+			this.getParameters().set("hotspotid",hotspotid);
+		}else{
+			throw new Error("HotSpot ID cant be empty");
+		}
+	}
+
+	addAward(award,category="",date="",state=""){
+		if(award){
+			this._verb=defaults.VERB_POST;
+			this.#method="addaward";
+			this.getParameters().set("award",award);
+			if(category){
+				this.getParameters().set("category",category);
+			}
+			if(state){
+				if(in_array(state,awardstates.getAllTypes())){
+					this.getParameters().set("state",state);
+				}else{
+					throw new Error("state must be in "+awardstates.getAllTypes().join(', '));
+				}
+			}
+			if(date){
+				if(tools.dateIsValid(date)){
+					this.getParameters().set("date",date);
+				}else{
+					throw new Error("Date must be in YYYY-MM-DD format");
+				}
+			}
+		}else{
+			throw new Error("Award cant be empty");
+		}
+	}
+
+	updateAward(awardid,award,category="",date="",state=""){
+		if(awardid){
+			this._verb=defaults.VERB_PUT;
+			this.#method="updateaward";
+			this.getParameters().set("awardid",awardid);
+			if(award){
+				this.getParameters().set("award",award);
+			}
+			if(category){
+				this.getParameters().set("category",category);
+			}
+			if(state){
+				if(in_array(state,awardstates.getAllTypes())){
+					this.getParameters().set("state",state);
+				}else{
+					throw new Error("state must be in "+awardstates.getAllTypes().join(','));
+				}
+			}
+			if(date){
+				if(tools.dateIsValid(date)){
+					this.getParameters().set("date",date);
+				}else{
+					throw new Error("Date must be in YYYY-MM-DD format");
+				}
+			}
+		}else{
+			throw new Error("Award ID cant be empty");
+		}
+	}
+
+	removeAward(awardid){
+		if(awardid){
+			this._verb=defaults.VERB_DELETE;
+			this.#method="removeaward";
+			this.getParameters().set("awardid",awardid);
+		}else{
+			throw new Error("Award ID cant be empty");
 		}
 	}
 

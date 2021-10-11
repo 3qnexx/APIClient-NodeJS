@@ -2,6 +2,7 @@
 
 const {APICall}=require("../internals/apicall");
 const {StatisticParameters}=require("./parameters/statisticparameters");
+const tools=require("../internals/tools");
 const streamtypes=require("../enums/streamtypes");
 const registrationproviders=require("../enums/registrationproviders");
 const revenuetypes=require("../enums/revenuetypes");
@@ -20,10 +21,6 @@ class StatisticsCall extends APICall{
 		this.setDates(date.format(date.addDays(now,-30),"YYYY-MM-DD"),date.format(date.addDays(now,-1),"YYYY-MM-DD"));
     }
 
-	#dateIsValid(datestring){
-		return (date.isValid(datestring,"YYYY-MM-DD"));
-	}
-
 	#timeframeIsValid(timeframe){
 		return([5, 10, 15, 30, 60, 120, 180, 240].includes(timeframe));
 	}
@@ -37,12 +34,12 @@ class StatisticsCall extends APICall{
 	}
 
 	setDates(from,to){
-		if(this.#dateIsValid(from)){
+		if(tools.dateIsValid(from)){
 			this.getParameters().setFrom(from);
 		}else{
 			throw new Error("from must be in YYYY-MM-DD format");
 		}
-		if(this.#dateIsValid(to)){
+		if(tools.dateIsValid(to)){
 			this.getParameters().setTo(to);
 		}else{
 			throw new Error("to must be in YYYY-MM-DD format");

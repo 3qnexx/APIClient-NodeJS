@@ -20,7 +20,7 @@
   "dependencies": {
     "@azure/storage-blob": "^12.8.0",
     "abort-controller": "^3.0.0",
-    "date-and-time": "^2.0.0",
+    "date-and-time": "^2.0.1",
     "node-fetch": "^2.6.5",
     "path": "^0.12.7"
   }

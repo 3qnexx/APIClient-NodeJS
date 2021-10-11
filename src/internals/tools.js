@@ -1,6 +1,7 @@
 "use strict";
 
 const defaults=require("../enums/defaults");
+const date = require('date-and-time');
 
 class Tools{
 
@@ -34,6 +35,10 @@ class Tools{
 
 	static callShouldIncreateTimeout(endpoint){
 		return((this.isManageCall(endpoint))||(this.isStatisticsCall(endpoint)));
+	}
+
+	dateIsValid(datestring){
+		return (date.isValid(datestring,"YYYY-MM-DD"));
 	}
 
 }
