@@ -6,6 +6,7 @@ const types={
 	TWITTER:'twitter',
 	VIMEO:'vimeo',
 	YOUTUBE:'youtube',
+	TIKTOK:'tiktok',
 	EXTERNALVIEW:'externalview'
 };
 
