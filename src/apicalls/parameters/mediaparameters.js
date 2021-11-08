@@ -48,6 +48,10 @@ class MediaParameters extends Parameters{
 		}
 	}
 
+	restrictToHDR(){
+		this._params['onlyHDR']=1;
+	}
+
 	restrictToPlanned(){
 		this._params['onlyPlanned']=1;
 	}
