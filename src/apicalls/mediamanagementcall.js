@@ -633,6 +633,24 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
+	startRecording(){
+		if([streamtypes.LIVE].includes(this.#streamtype)){
+			this._verb=defaults.VERB_POST;
+			this.#method="startrecording";
+		}else{
+			throw new Error("Streamtype must be live");
+		}
+	}
+
+	stopRecording(){
+		if([streamtypes.LIVE].includes(this.#streamtype)){
+			this._verb=defaults.VERB_POST;
+			this.#method="stoprecording";
+		}else{
+			throw new Error("Streamtype must be live");
+		}
+	}
+
 	exportItem(accountID,externalCategory="",externalState=externalstates.PUBLIC, postText="",publicationDate=0,inVariant=0){
 		if(accountID>0){
 			if(streamtypes.getExportableTypes().includes(this.#streamtype)){
