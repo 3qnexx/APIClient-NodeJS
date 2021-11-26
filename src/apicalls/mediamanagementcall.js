@@ -651,12 +651,15 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	exportItem(accountID,externalCategory="",externalState=externalstates.PUBLIC, postText="",publicationDate=0,inVariant=0){
+	exportItem(accountID,externalCategory="",externalState=externalstates.PUBLIC, postText="",publicationDate=0,inVariant=0,list=0){
 		if(accountID>0){
 			if(streamtypes.getExportableTypes().includes(this.#streamtype)){
 				this._verb=defaults.VERB_POST;
 				this.#method="export";
 				this.getParameters().set("account",accountID);
+				if(list){
+					this.getParameters().set("list",list);
+				}
 				if(externalCategory){
 					this.getParameters().set("externalCategory",externalCategory);
 				}
