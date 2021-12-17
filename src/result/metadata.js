@@ -43,6 +43,10 @@ class MetaData{
 		return(this.#data['errorhint']);
 	}
 
+	getNotice(){
+		return(this.#data['notice']);
+	}
+
 }
 
 module.exports={MetaData};

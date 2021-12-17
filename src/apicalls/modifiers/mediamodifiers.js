@@ -81,6 +81,34 @@ class MediaModifiers extends Modifiers{
 		}
 	}
 
+	addParentMedia(options='all',parentMediaDetails=""){
+		if(Array.isArray(options)){
+			options=options.join(',');
+		}
+		this._params['addParentMedia']=options;
+		if(parentMediaDetails!=""){
+			if(connectedmediadetails.getAllTypes().includes(parentMediaDetails)){
+				this._params['parentMediaDetails']=parentMediaDetails;
+			}else{
+				throw new Error("Detail Level is unknown");
+			}
+		}
+	}
+
+	addReferencingMedia(options='all',referencingMediaDetails=""){
+		if(Array.isArray(options)){
+			options=options.join(',');
+		}
+		this._params['addReferencingMedia']=options;
+		if(referencingMediaDetails!=""){
+			if(connectedmediadetails.getAllTypes().includes(referencingMediaDetails)){
+				this._params['referencingMediaDetails']=referencingMediaDetails;
+			}else{
+				throw new Error("Detail Level is unknown");
+			}
+		}
+	}
+
 	addComments(context='all'){
 		if(commentcontexts.getAllTypes().includes(context)){
 			this._params['addComments']=context;
@@ -99,10 +127,6 @@ class MediaModifiers extends Modifiers{
 
 	addPaymentData(){
 		this._params['addPaymentData']=1;
-	}
-
-	addParentReferences(){
-		this._params['addParentReferences']=1;
 	}
 
 	addTranslations(){

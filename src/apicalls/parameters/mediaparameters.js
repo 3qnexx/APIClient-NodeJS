@@ -184,6 +184,22 @@ class MediaParameters extends Parameters{
 		}
 	}
 
+	setParentMediaDetails(level=connectedmediadetails.DEFAULT){
+		if(connectedmediadetails.getAllTypes().includes(level)){
+			this._params['parentMediaDetails']=format;
+		}else{
+			throw new Error("Detail Level is unknown");
+		}
+	}
+
+	setReferencingMediaDetails(level=connectedmediadetails.DEFAULT){
+		if(connectedmediadetails.getAllTypes().includes(level)){
+			this._params['referencingMediaDetails']=format;
+		}else{
+			throw new Error("Detail Level is unknown");
+		}
+	}
+
 	includeUGC(include,onlyUGC=false,onlyForUser=0){
 		if(onlyForUser>0){
 			onlyUGC=true;
