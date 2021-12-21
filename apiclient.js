@@ -34,11 +34,13 @@ class APIClient{
     #session;
     #customHost;
     #consumer='apiclient-node';
+    #apiVersion='';
     #timeout=10;
     #useHTTPS=true;
 
     constructor(domain,secret,session){
         this.configure(domain,secret,session);
+        this.#apiVersion=defaults.API_VERSION;
     }
 
     configure(domain,secret,session){
@@ -71,6 +73,12 @@ class APIClient{
         }
     }
 
+    setAPIVersion(version){
+        if(version){
+            this.#apiVersion=version;
+        }
+    }
+
     setCustomHost(host){
         this.#customHost=host;
     }
@@ -93,7 +101,7 @@ class APIClient{
         if(this.#customHost){
             host=this.#customHost;
         }
-        return("http"+(this.#useHTTPS?"s":"")+"://"+host+"/v"+defaults.API_VERSION+"/"+this.#domain+"/");
+        return("http"+(this.#useHTTPS?"s":"")+"://"+host+"/v"+this.#apiVersion+"/"+this.#domain+"/");
     }
 
     #callAPI(verb,endpoint,parameters,modifiers){
