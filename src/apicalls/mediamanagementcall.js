@@ -144,7 +144,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createFromTopic(title, topic="", itemSource="",duration=0,itemCount=0, searchMode="", searchFields=[], channel=0, format=0){
+	createFromTopic(title, topic="", itemSource="",duration=0,itemCount=0, searchMode="", searchFields=[], channel=0, format=0, category =0){
 		if(streamtypes.getSimpleContainerTypes().includes(this.#streamtype)){
 			this._verb=defaults.VERB_POST;
 			this.#method="fromtopic";
@@ -188,6 +188,9 @@ class MediaManagementCall extends APICall{
 			}
 			if(format>0){
 				this.getParameters().set("format",format);
+			}
+			if(category>0){
+				this.getParameters().set("category",category);
 			}
 		}else{
 			throw new Error("Streamtype must be in "+streamtypes.getSimpleContainerTypes().join(","));
