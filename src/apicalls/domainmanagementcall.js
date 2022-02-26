@@ -239,6 +239,20 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
+	#setCategoryCover(streamtype="",categoryID=0,url=""){
+		if(categoryID){
+			if(url){
+				this.#setItem(categoryID,streamtype+"category");
+				this._verb=defaults.VERB_POST;
+				this.#method="cover";
+			}else{
+				throw new Error("URL cant be empty");
+			}
+		}else{
+			throw new Error("Category ID cant be empty");
+		}
+	}
+
 	addVideoCategory(attributes={}){
 		this.#addCategory(streamtypes.VIDEO,attributes);
 	}
@@ -265,6 +279,10 @@ class DomainManagementCall extends APICall{
 
 	addPlaceCategory(attributes={}){
 		this.#addCategory(streamtypes.PLACE,attributes);
+	}
+
+	addProductCategory(attributes={}){
+		this.#addCategory(streamtypes.PRODUCT,attributes);
 	}
 
 	updateVideoCategory(categoryID=0,attributes=[]){
@@ -295,6 +313,10 @@ class DomainManagementCall extends APICall{
 		this.#updateCategory(streamtypes.PLACE,categoryID,attributes);
 	}
 
+	updateProductCategory(categoryID=0,attributes={}){
+		this.#updateCategory(streamtypes.PRODUCT,categoryID,attributes);
+	}
+
 	deleteVideoCategory(categoryID=0){
 		this.#deleteCategory(streamtypes.VIDEO,categoryID);
 	}
@@ -321,6 +343,42 @@ class DomainManagementCall extends APICall{
 
 	deletePlaceCategory(categoryID=0){
 		this.#deleteCategory(streamtypes.PLACE,categoryID);
+	}
+
+	deleteProductCategory(categoryID=0){
+		this.#deleteCategory(streamtypes.PRODUCT,categoryID);
+	}
+
+	setVideoCategoryCover(categoryID=0,url=""){
+		this.#setCategoryCover(streamtypes.VIDEO,categoryID,url);
+	}
+
+	setAudioCategoryCover(categoryID=0,url=""){
+		this.#setCategoryCover(streamtypes.AUDIO,categoryID,url);
+	}
+
+	setImageCategoryCover(categoryID=0,url=""){
+		this.#setCategoryCover(streamtypes.IMAGE,categoryID,url);
+	}
+
+	setArticleCategoryCover(categoryID=0,url=""){
+		this.#setCategoryCover(streamtypes.ARTICLE,categoryID,url);
+	}
+
+	setEventCategoryCover(categoryID=0,url=""){
+		this.#setCategoryCover(streamtypes.EVENT,categoryID,url);
+	}
+
+	setFileCategoryCover(categoryID=0,url=""){
+		this.#setCategoryCover(streamtypes.FILE,categoryID,url);
+	}
+
+	setPlaceCategoryCover(categoryID=0,url=""){
+		this.#setCategoryCover(streamtypes.PLACE,categoryID,url);
+	}
+
+	setProductCategoryCover(categoryID=0,url=""){
+		this.#setCategoryCover(streamtypes.PRODUCT,categoryID,url);
 	}
 
 }
