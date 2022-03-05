@@ -10,8 +10,17 @@ class DomainCall extends APICall{
 		this._path="domain/";
     }
 
-	publicInfo(){
+	publicInfo(addCustomAttributes,addChannels,addFormats){
 		this._path+="publicinfo";
+		if(addCustomAttributes){
+			this.getParameters().set("addCustomAttributes",1);
+		}
+		if(addChannels){
+			this.getParameters().set("addChannels",1);
+		}
+		if(addFormats){
+			this.getParameters().set("addFormats",1);
+		}
 	}
 
 	instantConfiguration(token){
@@ -77,6 +86,10 @@ class DomainCall extends APICall{
 
 	placeCategories(){
 		this._path+="placecategories";
+	}
+
+	productCategories(){
+		this._path+="productcategories";
 	}
 
 	tags(){
@@ -148,7 +161,7 @@ class DomainCall extends APICall{
 		this._path+="systemusers";
 	}
 
-	networkDomains(addChannels=false,addFormats=false,addVideoCategories=false,addAudioCategories=false,addImageCategories=false,addFileCategories=false,addArticleCategories=false,addEventCategories=false,addPlaceCategories=false,addAccounts=false,addLiveLinks=false,addAutoUpdateFeeds=false,addTags=false,addCustomAttributes=false){
+	networkDomains(addChannels=false,addFormats=false,addVideoCategories=false,addAudioCategories=false,addImageCategories=false,addFileCategories=false,addArticleCategories=false,addEventCategories=false,addPlaceCategories=false,addProductCategories=false,addAccounts=false,addLiveLinks=false,addAutoUpdateFeeds=false,addTags=false,addCustomAttributes=false){
 		this._path+="networkdomains";
 		if(addChannels){
 			this.getParameters().set("addChannels",1);
@@ -176,6 +189,9 @@ class DomainCall extends APICall{
 		}
 		if(addPlaceCategories){
 			this.getParameters().set("addPlaceCategories",1);
+		}
+		if(addProductCategories){
+			this.getParameters().set("addProductCategories",1);
 		}
 		if(addAccounts){
 			this.getParameters().set("addAccounts",1);
