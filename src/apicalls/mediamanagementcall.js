@@ -806,6 +806,15 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
+	addItemToRack(rackID=0){
+		if(rackID>0){
+			this._verb=defaults.VERB_POST;
+			this.#method="addtorack/"+rackID;
+		}else{
+			throw new Error("the ID of the Rack must be given.");
+		}
+	}
+
 	addItemToBundle(bundleID=0){
 		if(bundleID>0){
 			this._verb=defaults.VERB_POST;
@@ -839,6 +848,15 @@ class MediaManagementCall extends APICall{
 			this.#method="removefromset/"+setID;
 		}else{
 			throw new Error("the ID of the Set must be given.");
+		}
+	}
+
+	removeItemFromRack(rackID=0){
+		if(rackID>0){
+			this._verb=defaults.VERB_DELETE;
+			this.#method="removefromrack/"+rackID;
+		}else{
+			throw new Error("the ID of the Rack must be given.");
 		}
 	}
 

@@ -72,6 +72,10 @@ class SystemCall extends APICall{
 		this._path+="operationstate/"+id;
 	}
 
+	currentIncidents(){
+		this._path+="currentincidents";
+	}
+
 }
 
 module.exports={SystemCall};

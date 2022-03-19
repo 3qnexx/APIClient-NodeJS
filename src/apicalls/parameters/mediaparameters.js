@@ -134,7 +134,7 @@ class MediaParameters extends Parameters{
 		this._params['contentType']=type;
 	}
 
-	//only valid for SCENE and LINK
+	//only valid for SCENE, RACK and LINK
 	restrictToPurpose(purpose){
 		this._params['purpose']=purpose;
 	}

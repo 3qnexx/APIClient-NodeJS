@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+1.1.5 (2022-03-18)
+-------------------
+
+* adding Support for new Streamtype "Rack"
+* adding Support for new "currentincidents" System Endpoint
+
+
 1.1.4 (2022-03-05)
 -------------------
 

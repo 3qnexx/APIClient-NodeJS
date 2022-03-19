@@ -9,6 +9,7 @@ const types={
     RADIO:'radio',
     COLLECTION:'collection',
     SET:'set',
+    RACK:'rack',
     SERIES:'series',
     BUNDLE:'bundle',
     IMAGE:'image',
@@ -59,11 +60,11 @@ function getUploadableTypes(){
 };
 
 function getPlayerTypes(){
-    return([types.VIDEO,types.PLAYLIST,types.SET,types.COLLECTION,types.AUDIO,types.RADIO,types.AUDIOALBUM,types.LIVE,types.SCENE]);
+    return([types.VIDEO,types.PLAYLIST,types.SET,types.COLLECTION,types.AUDIO,types.RADIO,types.AUDIOALBUM,types.LIVE,types.SCENE,types.RACK]);
 };
 
 function getContainerTypes(){
-    return([types.PLAYLIST,types.SET,types.ALBUM,types.COLLECTION,types.AUDIOALBUM,types.FOLDER,types.MAGAZINE,types.GROUP,types.BUNDLE,types.SERIES]);
+    return([types.PLAYLIST,types.SET,types.ALBUM,types.COLLECTION,types.AUDIOALBUM,types.FOLDER,types.MAGAZINE,types.GROUP,types.BUNDLE,types.SERIES,types.RACK]);
 };
 
 function getSimpleContainerTypes(){
