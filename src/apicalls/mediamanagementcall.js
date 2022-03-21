@@ -797,19 +797,25 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	addItemToSet(setID=0){
+	addItemToSet(setID=0,purpose=''){
 		if(setID>0){
 			this._verb=defaults.VERB_POST;
 			this.#method="addtoset/"+setID;
+			if(purpose){
+				this.getParameters().set("purpose",purpose);
+			}
 		}else{
 			throw new Error("the ID of the Set must be given.");
 		}
 	}
 
-	addItemToRack(rackID=0){
+	addItemToRack(rackID=0,purpose=''){
 		if(rackID>0){
 			this._verb=defaults.VERB_POST;
 			this.#method="addtorack/"+rackID;
+			if(purpose){
+				this.getParameters().set("purpose",purpose);
+			}
 		}else{
 			throw new Error("the ID of the Rack must be given.");
 		}
@@ -887,19 +893,25 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	connectPersonToItem(personID=0){
+	connectPersonToItem(personID=0,purpose=''){
 		if(personID>0){
 			this._verb=defaults.VERB_PUT;
 			this.#method="connectperson/"+personID;
+			if(purpose){
+				this.getParameters().set("purpose",purpose);
+			}
 		}else{
 			throw new Error("the ID of the Person must be given.");
 		}
 	}
 
-	connectGroupToItem(groupID=0){
+	connectGroupToItem(groupID=0,purpose=''){
 		if(groupID>0){
 			this._verb=defaults.VERB_PUT;
 			this.#method="connectgroup/"+groupID;
+			if(purpose){
+				this.getParameters().set("purpose",purpose);
+			}
 		}else{
 			throw new Error("the ID of the Group must be given.");
 		}

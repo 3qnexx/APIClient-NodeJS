@@ -305,6 +305,14 @@ class MediaParameters extends Parameters{
 		this._params['includeSeasons']=(include?1:0);
 	}
 
+	includeRackParts(include,onlyRackParts=false){
+		if(onlyRackParts){
+			include=1;
+			this._params['onlyRackParts']=1;
+		}
+		this._params['includeRackParts']=(include?1:0);
+	}
+
 }
 
 module.exports={MediaParameters};
