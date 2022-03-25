@@ -53,11 +53,14 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	#handleCover(method,url="",fromTime=0){
+	#handleCover(method,url="",description="",fromTime=0){
 		if(substr(url,0,4)=="http"){
 			this._verb=defaults.VERB_POST;
 			this.#method=method;
 			this.getParameters().set("url",url);
+			if(description){
+				this.getParameters().set("description",description);
+			}
 		}else if((fromTime>0)&&(in_array(this.#streamtype,[streamtypes.VIDEO,streamtypes.SCENE,'variant']))){
 			this._verb=defaults.VERB_POST;
 			this.#method=method;
@@ -1007,32 +1010,32 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	setItemCover(url="",fromTime=0){
-		this.#handleCover("cover",url,fromTime);
+	setItemCover(url="", description="",fromTime=0){
+		this.#handleCover("cover",url,description,fromTime);
 	}
 
-	setItemCoverAlternative(url="",fromTime=0){
-		this.#handleCover("alternativecover",url,fromTime);
+	setItemCoverAlternative(url="", description="",fromTime=0){
+		this.#handleCover("alternativecover",url,description,fromTime);
 	}
 
-	setItemCoverABTest(url="",fromTime=0){
-		this.#handleCover("abtestalternative",url,fromTime);
+	setItemCoverABTest(url="", description="",fromTime=0){
+		this.#handleCover("abtestalternative",url,description,fromTime);
 	}
 
-	setItemCoverActionShot(url="",fromTime=0){
-		this.#handleCover("actionshot",url,fromTime);
+	setItemCoverActionShot(url="", description="",fromTime=0){
+		this.#handleCover("actionshot",url,description,fromTime);
 	}
 
-	setItemCoverQuad(url="",fromTime=0){
-		this.#handleCover("quadcover",url,fromTime);
+	setItemCoverQuad(url="", description="",fromTime=0){
+		this.#handleCover("quadcover",url,description,fromTime);
 	}
 
-	setItemCoverBanner(url="",fromTime=0){
-		this.#handleCover("banner",url,fromTime);
+	setItemCoverBanner(url="", description="",fromTime=0){
+		this.#handleCover("banner",url,description,fromTime);
 	}
 
-	setItemCoverFamilySafe(url="",fromTime=0){
-		this.#handleCover("familysafe",url,fromTime);
+	setItemCoverFamilySafe(url="", description="",fromTime=0){
+		this.#handleCover("familysafe",url,description,fromTime);
 	}
 
 	addCaptionsFromURL(url="",language="",title="",withAudioDescription=false){

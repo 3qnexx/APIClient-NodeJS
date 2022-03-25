@@ -1,6 +1,6 @@
 {
   "name": "nexxomnia-api-nodejs",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "description": "The nexxOMNIA API Client for NodeJS",
   "keywords": [
     "3q",

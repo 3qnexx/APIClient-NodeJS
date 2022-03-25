@@ -100,6 +100,40 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
+	setChannelCover(channelID=0,url="", description=""){
+		if(channelID){
+			if(url){
+				this.#setItem(formatID,"channel");
+				this._verb=defaults.VERB_POST;
+				this.#method="cover";
+				if(description){
+					this.getParameters().set("description",description);
+				}
+			}else{
+				throw new Error("URL cant be empty");
+			}
+		}else{
+			throw new Error("Channel ID cant be empty");
+		}
+	}
+
+	setChannelCoverActionShot(channelID=0,url="", description=""){
+		if(channelID){
+			if(url){
+				this.#setItem(formatID,"channel");
+				this._verb=defaults.VERB_POST;
+				this.#method="actionshot";
+				if(description){
+					this.getParameters().set("description",description);
+				}
+			}else{
+				throw new Error("URL cant be empty");
+			}
+		}else{
+			throw new Error("Channel ID cant be empty");
+		}
+	}
+
 	removeChannel(channelID){
 		if(channelID>0){
 			this.#setItem(channelID,"channel");
@@ -136,6 +170,40 @@ class DomainManagementCall extends APICall{
 					value="";
 				}
 				this.getParameters().set(key,value);
+			}
+		}else{
+			throw new Error("Format ID cant be empty");
+		}
+	}
+
+	setFormatCover(formatID=0,url="", description=""){
+		if(formatID){
+			if(url){
+				this.#setItem(formatID,"format");
+				this._verb=defaults.VERB_POST;
+				this.#method="cover";
+				if(description){
+					this.getParameters().set("description",description);
+				}
+			}else{
+				throw new Error("URL cant be empty");
+			}
+		}else{
+			throw new Error("Format ID cant be empty");
+		}
+	}
+
+	setFormatCoverActionShot(formatID=0,url="", description=""){
+		if(formatID){
+			if(url){
+				this.#setItem(formatID,"format");
+				this._verb=defaults.VERB_POST;
+				this.#method="actionshot";
+				if(description){
+					this.getParameters().set("description",description);
+				}
+			}else{
+				throw new Error("URL cant be empty");
 			}
 		}else{
 			throw new Error("Format ID cant be empty");
@@ -239,12 +307,15 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
-	#setCategoryCover(streamtype="",categoryID=0,url=""){
+	#setCategoryCover(streamtype="",categoryID=0,url="", description=""){
 		if(categoryID){
 			if(url){
 				this.#setItem(categoryID,streamtype+"category");
 				this._verb=defaults.VERB_POST;
 				this.#method="cover";
+				if(description){
+					this.getParameters().set("description",description);
+				}
 			}else{
 				throw new Error("URL cant be empty");
 			}
@@ -349,36 +420,36 @@ class DomainManagementCall extends APICall{
 		this.#deleteCategory(streamtypes.PRODUCT,categoryID);
 	}
 
-	setVideoCategoryCover(categoryID=0,url=""){
-		this.#setCategoryCover(streamtypes.VIDEO,categoryID,url);
+	setVideoCategoryCover(categoryID=0,url="",description=""){
+		this.#setCategoryCover(streamtypes.VIDEO,categoryID,url,description);
 	}
 
-	setAudioCategoryCover(categoryID=0,url=""){
-		this.#setCategoryCover(streamtypes.AUDIO,categoryID,url);
+	setAudioCategoryCover(categoryID=0,url="",description=""){
+		this.#setCategoryCover(streamtypes.AUDIO,categoryID,url,description);
 	}
 
-	setImageCategoryCover(categoryID=0,url=""){
-		this.#setCategoryCover(streamtypes.IMAGE,categoryID,url);
+	setImageCategoryCover(categoryID=0,url="",description=""){
+		this.#setCategoryCover(streamtypes.IMAGE,categoryID,url,description);
 	}
 
-	setArticleCategoryCover(categoryID=0,url=""){
-		this.#setCategoryCover(streamtypes.ARTICLE,categoryID,url);
+	setArticleCategoryCover(categoryID=0,url="",description=""){
+		this.#setCategoryCover(streamtypes.ARTICLE,categoryID,url,description);
 	}
 
-	setEventCategoryCover(categoryID=0,url=""){
-		this.#setCategoryCover(streamtypes.EVENT,categoryID,url);
+	setEventCategoryCover(categoryID=0,url="",description=""){
+		this.#setCategoryCover(streamtypes.EVENT,categoryID,url,description);
 	}
 
-	setFileCategoryCover(categoryID=0,url=""){
-		this.#setCategoryCover(streamtypes.FILE,categoryID,url);
+	setFileCategoryCover(categoryID=0,url="",description=""){
+		this.#setCategoryCover(streamtypes.FILE,categoryID,url,description);
 	}
 
-	setPlaceCategoryCover(categoryID=0,url=""){
-		this.#setCategoryCover(streamtypes.PLACE,categoryID,url);
+	setPlaceCategoryCover(categoryID=0,url="",description=""){
+		this.#setCategoryCover(streamtypes.PLACE,categoryID,url,description);
 	}
 
-	setProductCategoryCover(categoryID=0,url=""){
-		this.#setCategoryCover(streamtypes.PRODUCT,categoryID,url);
+	setProductCategoryCover(categoryID=0,url="",description=""){
+		this.#setCategoryCover(streamtypes.PRODUCT,categoryID,url,description);
 	}
 
 }
