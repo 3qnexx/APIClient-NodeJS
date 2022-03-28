@@ -237,6 +237,10 @@ class MediaParameters extends Parameters{
 		this._params['includeNotListables']=(include?1:0);
 	}
 
+	includeInvalidChildMedia(include){
+		this._params['includeInvalidChildMedia']=(include?1:0);
+	}
+
 	forceResults(force){
 		this._params['forceResults']=(force?1:0);
 	}
