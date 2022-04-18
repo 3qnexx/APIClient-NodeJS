@@ -1,6 +1,6 @@
 {
   "name": "nexxomnia-api-nodejs",
-  "version": "1.1.7",
+  "version": "1.1.8",
   "description": "The nexxOMNIA API Client for NodeJS",
   "keywords": [
     "3q",
@@ -9,7 +9,11 @@
     "nexxtv",
     "omnia"
   ],
-  "homepage": "https://3q.video/nexx-for-publishers",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/3qnexx/APIClient-NodeJS"
+  },
+  "homepage": "https://api.docs.nexx.cloud/",
   "author": "3Q nexx GmbH",
   "license": "ISC",
   "main": "apiclient.js",

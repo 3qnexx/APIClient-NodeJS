@@ -1038,6 +1038,10 @@ class MediaManagementCall extends APICall{
 		this.#handleCover("familysafe",url,description,fromTime);
 	}
 
+	setItemCoverArtwork(url=""){
+		this.#handleCover("artwork",url,"",0);
+	}
+
 	addCaptionsFromURL(url="",language="",title="",withAudioDescription=false){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
 			if(url.substr(0,4)=="http"){
