@@ -743,7 +743,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	addItemPreviewLink(language="",maxStarts=0,code="",showAnnotations=true,allowAnnotations=true,allowSnapshots=false,allowSourceDownloads=false){
+	addItemPreviewLink(language="",maxStarts=0,code="",showAnnotations=true,allowAnnotations=true,allowSnapshots=false,allowSourceDownloads=false,useDomainStyle=false){
 		if(streamtypes.getPlayerTypes().includes(this.#streamtype)){
 			this._verb=defaults.VERB_POST;
 			this.#method="addpreviewlink";
@@ -767,6 +767,9 @@ class MediaManagementCall extends APICall{
 			}
 			if(allowSourceDownloads){
 				this.getParameters().set("allowSourceDownloads",1);
+			}
+			if(useDomainStyle){
+				this.getParameters().set("useDomainStyle",1);
 			}
 		}else{
 			throw new Error("Streamtype must be in "+streamtypes.getPlayerTypes().join(","));

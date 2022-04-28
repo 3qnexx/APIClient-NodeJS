@@ -220,7 +220,7 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
-	addUploadLink(title="",selectedStreamtypes=[],language="",maxUsages=0,code=""){
+	addUploadLink(title="",selectedStreamtypes=[],language="",maxUsages=0,code="",useDomainStyle=false){
 		this.#setStreamtype("uploadlink");
 		this._verb=defaults.VERB_POST;
 		this.#method="add";
@@ -252,6 +252,9 @@ class DomainManagementCall extends APICall{
 		}
 		if(code){
 			this.getParameters().set("code",code);
+		}
+		if(useDomainStyle){
+			this.getParameters().set("useDomainStyle",1);
 		}
 	}
 
