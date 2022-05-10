@@ -4,12 +4,14 @@ const types={
 	PC:'desktop',
 	MOBILE:'mobile',
 	TABLET:'tablet',
+	CAR:'car',
 	AMP:'amp',
 	FBIA:'fbia',
 	IOS:'ios',
 	ANDROID:'android',
 	SMARTTV:'smarttv',
 	ANDROIDTV:'androidtv',
+	ANDROIDCAR:'androidcar',
 	podcast:'podcast'
 };
 
