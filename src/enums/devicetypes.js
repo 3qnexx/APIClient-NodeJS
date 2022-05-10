@@ -1,11 +1,13 @@
 "use strict";
 
 const types={
-	PC:'desktop',
+	PC:'pc',
 	MOBILE:'mobile',
 	TABLET:'tablet',
 	TV:'tv',
-	SMART:'smart'
+	WATCH:'watch',
+	SMART:'smart',
+	CAR:'car'
 };
 
 function getAllTypes(){
