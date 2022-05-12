@@ -51,6 +51,10 @@ class MediaCall extends APICall{
 		this._method="byid/"+id;
 	}
 
+	byGlobalID(id){
+		this._method="byglobalid/"+id;
+	}
+
 	byHash(hash){
 		this._method="byhash/"+hash;
 	}
@@ -69,10 +73,6 @@ class MediaCall extends APICall{
 
 	byRemoteReference(ref){
 		this._method="byremotereference/"+ref;
-	}
-
-	byGlobalID(id){
-		this.#verifyParameter("byglobalid",id,[streamtypes.ALLMEDIA]);
 	}
 
 	all(){
