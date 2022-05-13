@@ -108,39 +108,33 @@ class MediaManagementCall extends APICall{
 
 	createFromData(title,refnr="",codename="",autoPublish=null,personGender="",personType=""){
 		if(!streamtypes.getUploadableTypes().includes(this.#streamtype)){
-			if((!codename)||(!streamtypes.getContainerTypes().includes(this.#streamtype))){
-				this._verb=defaults.VERB_POST;
-				this.#method="fromdata";
-				if(title){
-					if([streamtypes.PERSON,streamtypes.GROUP].includes(this.#streamtype)){
-						this.getParameters().set('artistname',title);
-						if(personGender){
-							if(['m','f','n'].includes(personGender)){
-								this.getParameters().set('gender',personGender);
-							}else{
-								throw new Error("valid Genders are m, f and n.");
-							}
+			if(title){
+				if([streamtypes.PERSON,streamtypes.GROUP].includes(this.#streamtype)){
+					this.getParameters().set('artistname',title);
+					if(personGender){
+						if(['m','f','n'].includes(personGender)){
+							this.getParameters().set('gender',personGender);
+						}else{
+							throw new Error("valid Genders are m, f and n.");
 						}
-						if(personType){
-							this.getParameters().set('type',personType);
-						}
-					}else{
-						this.getParameters().set('title',title);
 					}
-					if(refnr){
-						this.getParameters().set("refnr",refnr);
-					}
-					if(codename){
-						this.getParameters().set("codename",refnr);
-					}
-					if(autoPublish!==null){
-						this.getParameters().set("autoPublish",(autoPublish?1:0));
+					if(personType){
+						this.getParameters().set('type',personType);
 					}
 				}else{
-					throw new Error("Title cant be empty");
+					this.getParameters().set('title',title);
+				}
+				if(refnr){
+					this.getParameters().set("refnr",refnr);
+				}
+				if(codename){
+					this.getParameters().set("codename",refnr);
+				}
+				if(autoPublish!==null){
+					this.getParameters().set("autoPublish",(autoPublish?1:0));
 				}
 			}else{
-				throw new Error("Container Streamtypes need a valid Codename");
+				throw new Error("Title cant be empty");
 			}
 		}else{
 			throw new Error("Streamtype cannot be in "+streamtypes.getUploadableTypes().join(","));
