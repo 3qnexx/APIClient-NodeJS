@@ -4,6 +4,7 @@ const {Parameters}=require("../../internals/parameters");
 
 const dimensioncodes=require("../../enums/dimensioncodes");
 const connectedmediadetails=require("../../enums/connectedmediadetails");
+const autofillresultmodes=require("../../enums/autofillresultmodes");
 const streamtypes=require("../../enums/streamtypes");
 
 class MediaParameters extends Parameters{
@@ -170,6 +171,22 @@ class MediaParameters extends Parameters{
 		}
 	}
 
+	respectGeoRestrictions(country){
+		if((country=='auto')||(country.length==2)){
+			this._params['respectGeoRestrictions']=country;
+		}else{
+			throw new Error("Country is unknown");
+		}
+	}
+
+	autoFillResults(mode){
+		if(autofillresultmodes.getAllTypes().includes(mode)){
+			this._params['autoFillResults']=mode;
+		}else{
+			throw new Error("AutoFill Mode is unknown");
+		}
+	}
+
 	excludeItems(list){
 		if(Array.isArray(list)){
 			this._params['excludeItems']=list.join(",");
@@ -239,10 +256,6 @@ class MediaParameters extends Parameters{
 
 	includeInvalidChildMedia(include){
 		this._params['includeInvalidChildMedia']=(include?1:0);
-	}
-
-	forceResults(force){
-		this._params['forceResults']=(force?1:0);
 	}
 
 	includeTrailers(include,onlyTrailers=false){
