@@ -48,6 +48,10 @@ class SystemCall extends APICall{
 		this._path+="persontypes";
 	}
 
+	ttsVoices(){
+		this._path+="ttsvoices";
+	}
+
 	editableAttributesFor(streamtype){
 		if(streamtypes.getAllTypes().includes(streamtype)){
 			this._path+="editableattributesfor/"+streamtype;

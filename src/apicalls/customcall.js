@@ -11,8 +11,8 @@ class CustomCall extends APICall{
     }
 
     setPath(path){
-        if(path.substr(0,1)=="/"){
-            path=path.substr(1);
+        if(path.startsWith("/")){
+            path=path.slice(1);
         }
         this._path=path;
     }

@@ -20,7 +20,7 @@ function getAllTypes(){
 }
 
 function getMediaGateways(){
-    return([types.PC,types.MOBILE,types.SMARTTV,types.CAR]);
+    return([types.PC,types.MOBILE,types.SMARTTV]);
 }
 
 module.exports=types;

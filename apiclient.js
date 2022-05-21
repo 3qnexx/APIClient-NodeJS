@@ -120,7 +120,6 @@ class APIClient{
                 url+="?"+up.toString();
             }
         }
-
         let fetchParams={
             method:verb,
             headers:{

@@ -54,7 +54,7 @@ class MediaManagementCall extends APICall{
 	}
 
 	#handleCover(method,url="",description="",fromTime=0){
-		if(substr(url,0,4)=="http"){
+		if(url.startsWith("http")){
 			this._verb=defaults.VERB_POST;
 			this.#method=method;
 			this.getParameters().set("url",url);
@@ -72,7 +72,7 @@ class MediaManagementCall extends APICall{
 
 	createFromURL(url, useQueue=true, autoPublish=null, refnr="",queueStart=0, asVariantFor="", asVariantOf=0){
 		if(streamtypes.getUploadableTypes().includes(this.#streamtype)){
-			if(url.substr(0,4)=="http"){
+			if(url.startsWith("http")){
 				this._verb=defaults.VERB_POST;
 				this.#method="fromurl";
 				this.getParameters().set("url",url);
@@ -108,33 +108,39 @@ class MediaManagementCall extends APICall{
 
 	createFromData(title,refnr="",codename="",autoPublish=null,personGender="",personType=""){
 		if(!streamtypes.getUploadableTypes().includes(this.#streamtype)){
-			if(title){
-				if([streamtypes.PERSON,streamtypes.GROUP].includes(this.#streamtype)){
-					this.getParameters().set('artistname',title);
-					if(personGender){
-						if(['m','f','n'].includes(personGender)){
-							this.getParameters().set('gender',personGender);
-						}else{
-							throw new Error("valid Genders are m, f and n.");
+			if((!codename)||(!streamtypes.getContainerTypes().includes(this.#streamtype))){
+				this._verb=defaults.VERB_POST;
+				this.#method="fromdata";
+				if(title){
+					if([streamtypes.PERSON,streamtypes.GROUP].includes(this.#streamtype)){
+						this.getParameters().set('artistname',title);
+						if(personGender){
+							if(['m','f','n'].includes(personGender)){
+								this.getParameters().set('gender',personGender);
+							}else{
+								throw new Error("valid Genders are m, f and n.");
+							}
 						}
+						if(personType){
+							this.getParameters().set('type',personType);
+						}
+					}else{
+						this.getParameters().set('title',title);
 					}
-					if(personType){
-						this.getParameters().set('type',personType);
+					if(refnr){
+						this.getParameters().set("refnr",refnr);
+					}
+					if(codename){
+						this.getParameters().set("codename",refnr);
+					}
+					if(autoPublish!==null){
+						this.getParameters().set("autoPublish",(autoPublish?1:0));
 					}
 				}else{
-					this.getParameters().set('title',title);
-				}
-				if(refnr){
-					this.getParameters().set("refnr",refnr);
-				}
-				if(codename){
-					this.getParameters().set("codename",refnr);
-				}
-				if(autoPublish!==null){
-					this.getParameters().set("autoPublish",(autoPublish?1:0));
+					throw new Error("Title cant be empty");
 				}
 			}else{
-				throw new Error("Title cant be empty");
+				throw new Error("Container Streamtypes need a valid Codename");
 			}
 		}else{
 			throw new Error("Streamtype cannot be in "+streamtypes.getUploadableTypes().join(","));
@@ -252,12 +258,12 @@ class MediaManagementCall extends APICall{
 	}
 
 	createLiveStreamFromRemote(hlsURL,dashURL="",title="",type=livestreamtypes.EVENT){
-		if((hlsURL)&&(hlsURL.substr(0,4)=="http")){
+		if((hlsURL)&&(hlsURL.startsWith("http"))){
 			this.setStreamtype(streamtypes.LIVE);
 			this._verb=defaults.VERB_POST;
 			this.#method="fromremote";
 			this.getParameters().set("hlsURL",hlsURL);
-			if((dashURL)&&(dashURL.substr(0,4)=="http")){
+			if((dashURL)&&(dashURL.startsWith("http"))){
 				this.getParameters().set("dashURL",dashURL);
 			}
 			if(title){
@@ -300,7 +306,7 @@ class MediaManagementCall extends APICall{
 	}
 
 	createRadioFromRemote(url,title="",type=livestreamtypes.EVENT){
-		if((url)&&(url.substr(0,4)=='http')){
+		if((url)&&(url.startsWith('http'))){
 			this.setStreamtype(streamtypes.RADIO);
 			this._verb=defaults.VERB_POST;
 			this.#method="fromremote";
@@ -358,39 +364,29 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createAudioFromText(text,language=""){
-		if(text){
+	createAudioFromText(textcontent, title="", subtitle="", teaser="", language="",voice=""){
+		if(textcontent){
 			this.setStreamtype(streamtypes.AUDIO);
 			this._verb=defaults.VERB_POST;
 			this.#method="fromtext";
-			this.getParameters().set("text",text);
+			this.getParameters().set("textcontent",textcontent);
 			if(language.length==2){
 				this.getParameters().set("language",language);
 			}
+			if(title){
+				this.getParameters().set("title",title);
+			}
+			if(subtitle){
+				this.getParameters().set("subtitle",subtitle);
+			}
+			if(teaser){
+				this.getParameters().set("teaser",teaser);
+			}
+			if(voice){
+				this.getParameters().set("voice",voice);
+			}
 		}else{
 			throw new Error("a non-empty Text must be given.");
-		}
-	}
-
-	createAudioFromArticle(articleID=0,includeTitle=true,includeSubtitle=false,includeTeaser=false,useAsRepresentation=false){
-		if(articleID>0){
-			this.setStreamtype(streamtypes.AUDIO);
-			this._verb=defaults.VERB_POST;
-			this.#method="fromarticle/"+articleID;
-			if(includeTitle){
-				this.getParameters().set('includeTitle',1);
-			}
-			if(includeSubtitle){
-				this.getParameters().set('includeSubtitle',1);
-			}
-			if(includeTeaser){
-				this.getParameters().set('includeTeaser',1);
-			}
-			if(useAsRepresentation){
-				this.getParameters().set('useAsRepresentation',1);
-			}
-		}else{
-			throw new Error("the Article ID must be given.");
 		}
 	}
 
@@ -437,7 +433,7 @@ class MediaManagementCall extends APICall{
 
 	updateItemFile(url){
 		if(streamtypes.getUploadableTypes().includes(this.#streamtype)){
-			if(url.substr(0,4)=="http"){
+			if(url.startsWith("http")){
 				this._verb=defaults.VERB_PUT;
 				this.#method="updatefile";
 				this.getParameters().set("url",url);
@@ -472,6 +468,48 @@ class MediaManagementCall extends APICall{
 				value="";
 			}
 			this.getParameters().set(key,value);
+		}
+	}
+
+	updateAudioContent(textcontent='',title='',subtitle='',teaser='',language='',voice=''){
+		this.setStreamtype(streamtypes.AUDIO);
+		this._verb=defaults.VERB_PUT;
+		this.#method="updatecontent";
+		if(textcontent){
+			this.getParameters().set('textcontent',textcontent);
+		}
+		if(title){
+			this.getParameters().set('title',title);
+		}
+		if(subtitle){
+			this.getParameters().set('subtitle',subtitle);
+		}
+		if(teaser){
+			this.getParameters().set('teaser',teaser);
+		}
+		if(language){
+			this.getParameters().set('language',language);
+		}
+		if(voice){
+			this.getParameters().set('voice',voice);
+		}
+	}
+
+	updateAudioRepresentation(includeTitle=false,includeSubtitle=false,includeTeaser=false,includeFragments=false){
+		this.setStreamtype(streamtypes.ARTICLE);
+		this._verb=defaults.VERB_PUT;
+		this.#method="updateaudiorepresentation";
+		if(includeTitle){
+			this.getParameters().set('includeTitle',1);
+		}
+		if(includeSubtitle){
+			this.getParameters().set('includeSubtitle',1);
+		}
+		if(includeTeaser){
+			this.getParameters().set('includeTeaser',1);
+		}
+		if(includeFragments){
+			this.getParameters().set('includeFragments',1);
 		}
 	}
 
@@ -1041,7 +1079,7 @@ class MediaManagementCall extends APICall{
 
 	addCaptionsFromURL(url="",language="",title="",withAudioDescription=false){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
-			if(url.substr(0,4)=="http"){
+			if(url.startsWith("http")){
 				this._verb=defaults.VERB_POST;
 				this.#method="captionsfromurl";
 				this.getParameters().set("url",url);
