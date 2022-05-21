@@ -135,7 +135,7 @@ class UploadHandler{
                             uploadcall.setItem(mediaid,streamtype);
 
 							switch(coverContext){
-								case covercontexts,COVER:
+								case covercontexts.COVER:
 									uploadcall.setItemCover(url);
 								break;
 								case covercontexts.ALTERNATIVE:

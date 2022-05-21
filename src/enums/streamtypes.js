@@ -41,15 +41,15 @@ function getPluralizedStreamtype(streamtype){
         case types.ALLMEDIA:
         break;
         default:
-            if(plural.substr(-8)=="category"){
+            if(plural.endsWith("category")){
                 plural=plural.replace("category","categories");
-            }else if(plural.substr(-1)!='s'){
+            }else if(!plural.endsWith('s')){
                 plural+='s';
             }
         break;
     }
     return(plural);
-};
+}
 
 function getAllTypes(){
     return(Object.values(types));
@@ -57,19 +57,19 @@ function getAllTypes(){
 
 function getUploadableTypes(){
     return([types.VIDEO,types.AUDIO,types.IMAGE,types.FILE]);
-};
+}
 
 function getPlayerTypes(){
     return([types.VIDEO,types.PLAYLIST,types.SET,types.COLLECTION,types.AUDIO,types.RADIO,types.AUDIOALBUM,types.LIVE,types.SCENE,types.RACK]);
-};
+}
 
 function getContainerTypes(){
     return([types.PLAYLIST,types.SET,types.ALBUM,types.COLLECTION,types.AUDIOALBUM,types.FOLDER,types.MAGAZINE,types.GROUP,types.BUNDLE,types.SERIES,types.RACK]);
-};
+}
 
 function getSimpleContainerTypes(){
     return([types.PLAYLIST,types.ALBUM,types.AUDIOALBUM,types.MAGAZINE]);
-};
+}
 
 function getExportableTypes(){
     return([types.VIDEO,types.LIVE,types.IMAGE,types.SCENE]);

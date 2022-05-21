@@ -11,7 +11,7 @@ class ResultObject{
 					if((target['itemupdate'])&&(target['itemupdate'][key])!=null){
 						return(target['itemupdate'][key]);        
 					}else{
-						var newKey=key.substr(3).toLowerCase();
+						var newKey=key.slice(3).toLowerCase();
 						if(['id','gid'].includes(newKey)){
 							newKey=newKey.toUpperCase();
 						}else if(['generatedid','generatedgid'].includes(newKey)){
@@ -21,7 +21,7 @@ class ResultObject{
 							return function(...args) {
 								return(target['itemupdate'][newKey]);
 							};      
-						}else if((key.substr(0,3)=='get')&&(target[newKey]!==null)){
+						}else if((key.startsWith('get'))&&(target[newKey]!==null)){
 							return function(...args) {
 								if(typeof(target[newKey])=="object"){
 									return new ResultObject(target[newKey]);
