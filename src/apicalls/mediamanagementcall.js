@@ -70,7 +70,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createFromURL(url, useQueue=true, autoPublish=null, refnr="",queueStart=0, asVariantFor="", asVariantOf=0){
+	createFromURL(url, useQueue=true, autoPublish=null, refnr="",queueStart=0, asVariantFor="", asVariantOf=0, sourceLanguage=""){
 		if(streamtypes.getUploadableTypes().includes(this.#streamtype)){
 			if(url.startsWith("http")){
 				this._verb=defaults.VERB_POST;
@@ -87,6 +87,11 @@ class MediaManagementCall extends APICall{
 				}
 				if(autoPublish!==null){
 					this.getParameters().set('autoPublish',(autoPublish?1:0));
+				}
+				if((this.#streamtype==streamtypes.VIDEO)||(this.#streamtype==streamtypes.AUDIO)){
+					if(sourceLanguage.length==2){
+						this.getParameters().set("language",sourceLanguage);
+					}
 				}
 				if(this.#streamtype==streamtypes.VIDEO){
 					if(asVariantOf>0){

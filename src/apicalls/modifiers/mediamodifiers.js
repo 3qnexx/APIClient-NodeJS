@@ -35,10 +35,6 @@ class MediaModifiers extends Modifiers{
 		this._params['addRestrictionDetails']=1;
 	}
 
-	addItemDetails(){
-		this._params['addItemDetails']=1;
-	}
-
 	addAwards(){
 		this._params['addAwards']=1;
 	}
@@ -95,6 +91,20 @@ class MediaModifiers extends Modifiers{
 		}
 	}
 
+	addChildMedia(options='all',childMediaDetails=""){
+		if(Array.isArray(options)){
+			options=options.join(',');
+		}
+		this._params['addChildMedia']=options;
+		if(childMediaDetails!=""){
+			if(connectedmediadetails.getAllTypes().includes(childMediaDetails)){
+				this._params['childMediaDetails']=childMediaDetails;
+			}else{
+				throw new Error("Detail Level is unknown");
+			}
+		}
+	}
+
 	addReferencingMedia(options='all',referencingMediaDetails=""){
 		if(Array.isArray(options)){
 			options=options.join(',');
@@ -133,10 +143,6 @@ class MediaModifiers extends Modifiers{
 		this._params['addTranslations']=1;
 	}
 
-	addItemData(){
-		this._params['addItemData']=1;
-	}
-
 	addCustomAttributes(){
 		this._params['addCustomAttributes']=1;
 	}
@@ -170,14 +176,6 @@ class MediaModifiers extends Modifiers{
 			options=options.join(',');
 		}
 		this._params['addInsights']=options;
-	}
-
-	addScenes(){
-		this._params['addScenes']=1;
-	}
-
-	addChapters(){
-		this._params['addChapters']=1;
 	}
 
 	addHotSpots(){
