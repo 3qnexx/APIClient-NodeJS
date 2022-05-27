@@ -163,7 +163,7 @@ class MediaParameters extends Parameters{
 		}
 	}
 
-	//only valid for COLLECTIONS or ALLMEDIA
+	//only valid for ALLMEDIA
 	restrictToStreamtypes(list){
 		if(Array.isArray(list)){
 			this._params['selectedStreamtypes']=list.join(",");
