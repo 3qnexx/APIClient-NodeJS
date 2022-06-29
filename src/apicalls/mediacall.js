@@ -310,8 +310,8 @@ class MediaCall extends APICall{
 		this.#verifyParameter("byplaylist",playlistid,[streamtypes.VIDEO]);
 	}
 
-	byLiveLink(liveLinkID){
-		this.#verifyParameter("bylivelink",liveLinkID,[streamtypes.VIDEO]);
+	byLiveConnection(liveConnectionID){
+		this.#verifyParameter("byliveconnection",liveConnectionID,[streamtypes.VIDEO]);
 	}
 
 	byAudioAlbum(albumid){
