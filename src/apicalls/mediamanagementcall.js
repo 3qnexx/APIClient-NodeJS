@@ -226,11 +226,11 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createLiveStreamFromLiveLink(liveLinkID=0,title="",type=livestreamtypes.EVENT){
-		if(liveLinkID>0){
+	createLiveStreamFromLiveConnection(liveConnectionID=0,title="",type=livestreamtypes.EVENT){
+		if(liveConnectionID>0){
 			this.setStreamtype(streamtypes.LIVE);
 			this._verb=defaults.VERB_POST;
-			this.#method="fromlivelink/"+liveLinkID;
+			this.#method="fromliveconnection/"+liveConnectionID;
 			if(title){
 				this.getParameters().set("title",title);
 			}
@@ -238,14 +238,14 @@ class MediaManagementCall extends APICall{
 				this.getParameters().set("type",type);
 			}
 		}else{
-			throw new Error("the LiveLink ID must be given.");
+			throw new Error("the LiveConnection ID must be given.");
 		}
 	}
 
-	createLiveStreamFromAutoLiveLink(title="",type=livestreamtypes.EVENT,sourceType=livesourcetypes.RTMP,enableDVR=false){
+	createLiveStreamFromAutoLiveConnection(title="",type=livestreamtypes.EVENT,sourceType=livesourcetypes.RTMP,enableDVR=false){
 		this.setStreamtype(streamtypes.LIVE);
 		this._verb=defaults.VERB_POST;
-		this.#method="fromautolivelink";
+		this.#method="fromautoliveconnection";
 		if(title){
 			this.getParameters().set("title",title);
 		}
@@ -282,11 +282,11 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createRadioFromLiveLink(liveLinkID=0,title="",type=livestreamtypes.EVENT){
-		if(liveLinkID>0){
+	createRadioFromLiveConnection(liveConnectionID=0,title="",type=livestreamtypes.EVENT){
+		if(liveConnectionID>0){
 			this.setStreamtype(streamtypes.RADIO);
 			this._verb=defaults.VERB_POST;
-			this.#method="fromlivelink/"+liveLinkID;
+			this.#method="fromliveconnection/"+liveConnectionID;
 			if(title){
 				this.getParameters().set("title",title);
 			}
@@ -294,14 +294,14 @@ class MediaManagementCall extends APICall{
 				this.getParameters().set("type",type);
 			}
 		}else{
-			throw new Error("the LiveLink ID must be given.");
+			throw new Error("the LiveConnection ID must be given.");
 		}
 	}
 
-	createRadioFromAutoLiveLink(title="",type=livestreamtypes.EVENT){
+	createRadioFromAutoLiveConnection(title="",type=livestreamtypes.EVENT){
 		this.setStreamtype(streamtypes.RADIO);
 		this._verb=defaults.VERB_POST;
-		this.#method="fromautolivelink";
+		this.#method="fromautoliveconnection";
 		if(title){
 			this.getParameters().set("title",title);
 		}

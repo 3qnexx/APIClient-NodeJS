@@ -48,8 +48,8 @@ class DomainCall extends APICall{
 		this._path+="accounts";
 	}
 
-	liveLinks(){
-		this._path+="livelinks";
+	liveConnections(){
+		this._path+="liveconnections";
 	}
 
 	channels(){
@@ -161,7 +161,7 @@ class DomainCall extends APICall{
 		this._path+="systemusers";
 	}
 
-	networkDomains(addChannels=false,addFormats=false,addVideoCategories=false,addAudioCategories=false,addImageCategories=false,addFileCategories=false,addArticleCategories=false,addEventCategories=false,addPlaceCategories=false,addProductCategories=false,addAccounts=false,addLiveLinks=false,addAutoUpdateFeeds=false,addTags=false,addCustomAttributes=false){
+	networkDomains(addChannels=false,addFormats=false,addVideoCategories=false,addAudioCategories=false,addImageCategories=false,addFileCategories=false,addArticleCategories=false,addEventCategories=false,addPlaceCategories=false,addProductCategories=false,addAccounts=false,addLiveConnections=false,addAutoUpdateFeeds=false,addTags=false,addCustomAttributes=false){
 		this._path+="networkdomains";
 		if(addChannels){
 			this.getParameters().set("addChannels",1);
@@ -196,8 +196,8 @@ class DomainCall extends APICall{
 		if(addAccounts){
 			this.getParameters().set("addAccounts",1);
 		}
-		if(addLiveLinks){
-			this.getParameters().set("addLiveLinks",1);
+		if(addLiveConnections){
+			this.getParameters().set("addLiveConnections",1);
 		}
 		if(addAutoUpdateFeeds){
 			this.getParameters().set("addAutoUpdateFeeds",1);
