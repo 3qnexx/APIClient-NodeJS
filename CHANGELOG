@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+1.2.3 (2022-07-27)
+-------------------
+
+* adding Media Endpoint /currentViewFor
+* adding "platformContext" Parameter on Media Export
+
 1.2.2 (2022-06-29)
 -------------------
 
