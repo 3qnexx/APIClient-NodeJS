@@ -161,6 +161,10 @@ class MediaCall extends APICall{
 		this._method="externalcommentsfor/"+id;
 	}
 
+	currentViewsFor(id){
+		this._method="currentviewsfor/"+id;
+	}
+
 	recommendationsFor(id){
 		this._method="recommendationsfor/"+id;
 	}

@@ -16,6 +16,7 @@ const highlightvideopurposes=require("../enums/highlightvideopurposes");
 const topicitemsources=require("../enums/topicitemsources");
 const querymodes=require("../enums/querymodes");
 const externalplatforms=require("../enums/externalplatforms");
+const externalplatformcontexts=require("../enums/externalplatformcontexts");
 const liveplaybackstates=require("../enums/liveplaybackstates");
 const awardstates=require("../enums/awardstates");
 const hotspottypes=require("../enums/hotspottypes");
@@ -694,7 +695,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	exportItem(accountID,externalCategory="",externalState=externalstates.PUBLIC, postText="",publicationDate=0,inVariant=0,list=0){
+	exportItem(accountID,externalCategory="",externalState=externalstates.PUBLIC, postText="",publicationDate=0,inVariant=0,list=0, platformContext=""){
 		if(accountID>0){
 			if(streamtypes.getExportableTypes().includes(this.#streamtype)){
 				this._verb=defaults.VERB_POST;
@@ -711,6 +712,9 @@ class MediaManagementCall extends APICall{
 				}
 				if((publicationDate>0)&&(externalState==externalstates.PRIVATE)){
 					this.getParameters().set("publicationDate",publicationDate);
+				}
+				if((this.#streamtype==streamtypes.VIDEO)&&(platformContext!="")&&(externalplatformcontexts.getAllTypes.includes(platformContext))){
+					this.getParameters().set("platformContext",platformContext);
 				}
 				if((this.#streamtype==streamtypes.VIDEO)&&(inVariant>0)){
 					this.getParameters().set("inVariant",inVariant);
