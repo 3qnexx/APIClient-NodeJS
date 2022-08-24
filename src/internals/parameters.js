@@ -99,8 +99,8 @@ class Parameters{
 		this.set('additionalFields',fields);
 	}
 
-	setOrder(order,direction="DESC"){
-		this.set('order',order);
+	setOrder(orderBy,direction="DESC"){
+		this.set('orderBy',orderBy);
 		if(['ASC','DESC'].includes(direction.toUpperCase())){
 			this.set('orderDir',direction.toUpperCase());
 		}
