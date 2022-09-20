@@ -194,10 +194,6 @@ class MediaModifiers extends Modifiers{
 		this._params['addBumpers']=1;
 	}
 
-	addVariantDetails(){
-		this._params['addVariantDetails']=1;
-	}
-
 	//only valid for Persons
 	addTaggedImages(){
 		this._params['addTaggedImages']=1;

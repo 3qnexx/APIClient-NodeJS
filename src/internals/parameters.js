@@ -99,8 +99,8 @@ class Parameters{
 		this.set('additionalFields',fields);
 	}
 
-	setOrder(order,direction="DESC"){
-		this.set('order',order);
+	setOrder(orderBy,direction="DESC"){
+		this.set('orderBy',orderBy);
 		if(['ASC','DESC'].includes(direction.toUpperCase())){
 			this.set('orderDir',direction.toUpperCase());
 		}
@@ -118,8 +118,8 @@ class Parameters{
 	}
 
 	setChildLimit(limit){
-		if(limit>defaults.MAX_RESULT_LIMIT){
-			throw new Error("max Child Limit is ".defaults.MAX_RESULT_LIMIT);
+		if(limit>defaults.MAX_RESULT_LIMIT_CHILDREN){
+			throw new Error("max Child Limit is ".defaults.MAX_RESULT_LIMIT_CHILDREN);
 		}else{
 			this.set('childLimit',Math.abs(limit));
 		}

@@ -10,7 +10,7 @@ class SessionParameters extends Parameters{
 
     setLanguage(language){
 		if((language)&&(language.lenth==2)){
-			this.set('explicitlanguage',language.toLowerCase());
+			this.set('explicitLanguage',language.toLowerCase());
 		}
 	}
 
@@ -22,8 +22,12 @@ class SessionParameters extends Parameters{
 		this.set('deliveryPartner',partner);
 	}
 
+	setAffiliatePartner(partner){
+		this.set('affiliatePartner',partner);
+	}
+
 	setAffiliatePartnerCode(code){
-		this.set('code',code);
+		this.set('nxp_afpc',code);
 	}
 
 	setDeviceName(name){
@@ -35,7 +39,7 @@ class SessionParameters extends Parameters{
 	}
 
 	setLinkOrigin(origin){
-		this.set('linkorigin',origin);
+		this.set('linkOrigin',origin);
 	}
 
 }

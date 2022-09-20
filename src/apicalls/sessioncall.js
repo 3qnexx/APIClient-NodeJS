@@ -15,7 +15,7 @@ class SessionCall extends APICall{
 		this._modifiers=new SessionModifiers();
     }
 
-	init(deviceHash,userHash="",previousSession=0,forcePersistantSession=false,externalUserReference=""){
+	init(deviceHash,userHash="",currentSession="",forcePersistantSession=false,externalUserReference="",latitude=0,longitude=0){
 		if(deviceHash){
 			this._path+="init";
 			this.getParameters().set('nxp_devh',deviceHash);
@@ -24,11 +24,17 @@ class SessionCall extends APICall{
 			}else if(externalUserReference!=''){
 				this.getParameters().set('externalUserReference',externalUserReference);
 			}
-			if(previousSession>0){
-				this.getParameters().set('precid',previousSession);
+			if(currentSession){
+				this.getParameters().set('currentSession',currentSession);
 			}
 			if(forcePersistantSession){
 				this.getParameters().set('forcePersistantSession',1);
+			}
+			if(latitude){
+				this.getParameters().set('lat',latitude);
+			}
+			if(longitude){
+				this.getParameters().set('lng',longitude);
 			}
 		}else{
 			throw new Error("deviceHash cant be empty");
