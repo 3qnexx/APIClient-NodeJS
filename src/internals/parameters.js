@@ -118,8 +118,8 @@ class Parameters{
 	}
 
 	setChildLimit(limit){
-		if(limit>defaults.MAX_RESULT_LIMIT){
-			throw new Error("max Child Limit is ".defaults.MAX_RESULT_LIMIT);
+		if(limit>defaults.MAX_RESULT_LIMIT_CHILDREN){
+			throw new Error("max Child Limit is ".defaults.MAX_RESULT_LIMIT_CHILDREN);
 		}else{
 			this.set('childLimit',Math.abs(limit));
 		}
