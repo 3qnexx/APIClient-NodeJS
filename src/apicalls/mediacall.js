@@ -8,6 +8,7 @@ const defaults=require("../enums/defaults");
 const streamtypes=require("../enums/streamtypes");
 const querymodes=require("../enums/querymodes");
 const geoquerymodes=require("../enums/geoquerymodes");
+const captionroles=require("../enums/captionroles");
 
 class MediaCall extends APICall{
     _streamtype;
@@ -190,8 +191,11 @@ class MediaCall extends APICall{
 		this._method="similarsfor/"+id;
 	}
 
-	captionsFor(id){
+	captionsFor(id,role=captionroles.SUBTITLES){
 		this.#verifyParameter("captionsfor",id,[streamtypes.VIDEO,streamtypes.AUDIO,streamtypes.ALLMEDIA]);
+		if(role){
+			this.getParameters().set("role",role);
+		}
 	}
 
 	stitchedManifestFor(id){
