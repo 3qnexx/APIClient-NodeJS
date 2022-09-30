@@ -4,6 +4,7 @@ const {DomainCall} = require("../apicalls/domaincall");
 const {MediaManagementCall} = require("../apicalls/mediamanagementcall");
 const streamtypes=require("../enums/streamtypes");
 const covercontexts=require("../enums/covercontexts");
+const captionroles=require("../enums/captionroles");
 
 const fs = require("fs");
 const path = require('path');
@@ -121,7 +122,7 @@ class UploadHandler{
 		return(isSuccess);
 	}
 
-    async setMediaCover(localPath,streamtype=streamtypes.VIDEO,mediaid=0,coverContext=covercontexts.COVER){
+    async setMediaCover(localPath,streamtype=streamtypes.VIDEO,mediaid=0,coverContext=covercontexts.COVER,coverDescription="",assetLanguage=""){
 		let isSuccess=false;
         if(this.#apiclient){
 			if((localPath)&&(fs.existsSync(localPath))){
@@ -136,25 +137,25 @@ class UploadHandler{
 
 							switch(coverContext){
 								case covercontexts.COVER:
-									uploadcall.setItemCover(url);
+									uploadcall.setItemCover(url,coverDescription,assetLanguage);
 								break;
 								case covercontexts.ALTERNATIVE:
-									uploadcall.setItemCoverAlternative(url);
+									uploadcall.setItemCoverAlternative(url,coverDescription,assetLanguage);
 								break;
 								case covercontexts.ABTEST:
-									uploadcall.setItemCoverABTest(url);
+									uploadcall.setItemCoverABTest(url,coverDescription,assetLanguage);
 								break;
 								case covercontexts.ACTIONSHOT:
-									uploadcall.setItemCoverActionShot(url);
+									uploadcall.setItemCoverActionShot(url,coverDescription,assetLanguage);
 								break;
 								case covercontexts.BANNER:
-									uploadcall.setItemCoverBanner(url);
+									uploadcall.setItemCoverBanner(url,coverDescription,assetLanguage);
 								break;
 								case covercontexts.QUAD:
-									uploadcall.setItemCoverQuad(url);
+									uploadcall.setItemCoverQuad(url,coverDescription,assetLanguage);
 								break;
 								case covercontexts.FAMILYSAFE:
-									uploadcall.setItemCoverFamilySafe(url);
+									uploadcall.setItemCoverFamilySafe(url,coverDescription,assetLanguage);
 								break;
 							}
 							let uploadresult=await this.#apiclient.call(uploadcall);
@@ -181,7 +182,7 @@ class UploadHandler{
 		return(isSuccess);
 	}
 
-    async addMediaCaptions(localPath,streamtype=streamtypes.VIDEO,mediaid=0,language='',withAudioDescription=false){
+    async addMediaCaptions(localPath,streamtype=streamtypes.VIDEO,mediaid=0,language='',role=captionroles.SUBTITLES){
 		let isSuccess=true;
         if(this.#apiclient){
 			if((localPath)&&(fs.existsSync(localPath))){
@@ -192,7 +193,7 @@ class UploadHandler{
 						if(azureupload){
                             let uploadcall=new MediaManagementCall();
                             uploadcall.setItem(mediaid,streamtype);
-                            uploadcall.addCaptionsFromURL(config.endpoint+"/"+config.file,language,"",withAudioDescription);
+                            uploadcall.addCaptionsFromURL(config.endpoint+"/"+config.file,language,"",role);
                             let uploadresult=await this.#apiclient.call(uploadcall);
                             if(uploadresult.isSuccess()){
                                 isSuccess=true;
