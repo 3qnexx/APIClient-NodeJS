@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-1.2.5 (2022-09-30)
+1.2.6 (2022-09-30)
 -------------------
 
 * Captions support roles now, which replaces "isAudioDescription"
