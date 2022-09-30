@@ -20,6 +20,7 @@ const externalplatformcontexts=require("../enums/externalplatformcontexts");
 const liveplaybackstates=require("../enums/liveplaybackstates");
 const awardstates=require("../enums/awardstates");
 const hotspottypes=require("../enums/hotspottypes");
+const captionroles=require("../enums/captionroles");
 
 class MediaManagementCall extends APICall{
 
@@ -54,13 +55,16 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	#handleCover(method,url="",description="",fromTime=0){
+	#handleCover(method,url="",description="",assetLanguage="",fromTime=0){
 		if(url.startsWith("http")){
 			this._verb=defaults.VERB_POST;
 			this.#method=method;
 			this.getParameters().set("url",url);
 			if(description){
 				this.getParameters().set("description",description);
+			}
+			if(assetLanguage){
+				this.getParameters().set("assetLanguage",assetLanguage);
 			}
 		}else if((fromTime>0)&&(in_array(this.#streamtype,[streamtypes.VIDEO,streamtypes.SCENE,'variant']))){
 			this._verb=defaults.VERB_POST;
@@ -1054,39 +1058,39 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	setItemCover(url="", description="",fromTime=0){
-		this.#handleCover("cover",url,description,fromTime);
+	setItemCover(url="", description="",assetLanguage="",fromTime=0){
+		this.#handleCover("cover",url,description,assetLanguage,fromTime);
 	}
 
-	setItemCoverAlternative(url="", description="",fromTime=0){
-		this.#handleCover("alternativecover",url,description,fromTime);
+	setItemCoverAlternative(url="", description="",assetLanguage="",fromTime=0){
+		this.#handleCover("alternativecover",url,description,assetLanguage,fromTime);
 	}
 
-	setItemCoverABTest(url="", description="",fromTime=0){
-		this.#handleCover("abtestalternative",url,description,fromTime);
+	setItemCoverABTest(url="", description="",assetLanguage="",fromTime=0){
+		this.#handleCover("abtestalternative",url,description,assetLanguage,fromTime);
 	}
 
-	setItemCoverActionShot(url="", description="",fromTime=0){
-		this.#handleCover("actionshot",url,description,fromTime);
+	setItemCoverActionShot(url="", description="",assetLanguage="",fromTime=0){
+		this.#handleCover("actionshot",url,description,assetLanguage,fromTime);
 	}
 
-	setItemCoverQuad(url="", description="",fromTime=0){
-		this.#handleCover("quadcover",url,description,fromTime);
+	setItemCoverQuad(url="", description="",assetLanguage="",fromTime=0){
+		this.#handleCover("quadcover",url,description,assetLanguage,fromTime);
 	}
 
-	setItemCoverBanner(url="", description="",fromTime=0){
-		this.#handleCover("banner",url,description,fromTime);
+	setItemCoverBanner(url="", description="",assetLanguage="",fromTime=0){
+		this.#handleCover("banner",url,description,assetLanguage,fromTime);
 	}
 
-	setItemCoverFamilySafe(url="", description="",fromTime=0){
-		this.#handleCover("familysafe",url,description,fromTime);
+	setItemCoverFamilySafe(url="", description="",assetLanguage="",fromTime=0){
+		this.#handleCover("familysafe",url,description,assetLanguage,fromTime);
 	}
 
 	setItemCoverArtwork(url=""){
 		this.#handleCover("artwork",url,"",0);
 	}
 
-	addCaptionsFromURL(url="",language="",title="",withAudioDescription=false){
+	addCaptionsFromURL(url="",language="",title="",role=captionroles.SUBTITLES){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
 			if(url.startsWith("http")){
 				this._verb=defaults.VERB_POST;
@@ -1100,8 +1104,8 @@ class MediaManagementCall extends APICall{
 				if(title){
 					this.getParameters().set("title",title);
 				}
-				if(withAudioDescription){
-					this.getParameters().set("withAudioDescription",1);
+				if(role){
+					this.getParameters().set("role",role);
 				}
 			}else{
 				throw new Error("a valid Caption URL is missing.");
@@ -1120,11 +1124,14 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	translateCaptionsTo(targetLanguage=""){
+	translateCaptionsTo(targetLanguage="",role=captionroles.SUBTITLES){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
 			if(language.length==2){
 				this._verb=defaults.VERB_POST;
 				this.#method="translatecaptionsto/"+targetLanguage;
+				if(role){
+					this.getParameters().set("role",role);
+				}
 			}else{
 				throw new Error("Target Language must be given in 2-Letter-Code");
 			}
@@ -1133,14 +1140,14 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	removeCaptions(language="",withAudioDescription=false){
+	removeCaptions(language="",role=captionroles.SUBTITLES){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
 			if(language.length==2){
 				this._verb=defaults.VERB_DELETE;
 				this.#method="removecaptions";
 				this.getParameters().set("language",language);
-				if(withAudioDescription){
-					this.getParameters().set("withAudioDescription",1);
+				if(role){
+					this.getParameters().set("role",role);
 				}
 			}else{
 				throw new Error("Language must be given in 2-Letter-Code");
