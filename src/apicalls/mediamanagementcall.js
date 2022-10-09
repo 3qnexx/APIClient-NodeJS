@@ -20,7 +20,7 @@ const externalplatformcontexts=require("../enums/externalplatformcontexts");
 const liveplaybackstates=require("../enums/liveplaybackstates");
 const awardstates=require("../enums/awardstates");
 const hotspottypes=require("../enums/hotspottypes");
-const captionroles=require("../enums/captionroles");
+const texttrackroles=require("../enums/texttrackroles");
 
 class MediaManagementCall extends APICall{
 
@@ -1090,11 +1090,11 @@ class MediaManagementCall extends APICall{
 		this.#handleCover("artwork",url,"",0);
 	}
 
-	addCaptionsFromURL(url="",language="",title="",role=captionroles.SUBTITLES){
+	addTextTrackFromURL(url="",language="",title="",role=texttrackroles.SUBTITLES){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
 			if(url.startsWith("http")){
 				this._verb=defaults.VERB_POST;
-				this.#method="captionsfromurl";
+				this.#method="texttrackfromurl";
 				this.getParameters().set("url",url);
 				if(language.length==2){
 					this.getParameters().set("language",language);
@@ -1108,27 +1108,27 @@ class MediaManagementCall extends APICall{
 					this.getParameters().set("role",role);
 				}
 			}else{
-				throw new Error("a valid Caption URL is missing.");
+				throw new Error("a valid TextTrack URL is missing.");
 			}
 		}else{
 			throw new Error("Streamtype must be in video,audio");
 		}
 	}
 
-	addCaptionsFromSpeech(){
+	addTextTrackFromSpeech(){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
 			this._verb=defaults.VERB_POST;
-			this.#method="captionsfromspeech";
+			this.#method="texttrackfromspeech";
 		}else{
 			throw new Error("Streamtype must be in video,audio");
 		}
 	}
 
-	translateCaptionsTo(targetLanguage="",role=captionroles.SUBTITLES){
+	translateTextTrackTo(targetLanguage="",role=texttrackroles.SUBTITLES){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
 			if(language.length==2){
 				this._verb=defaults.VERB_POST;
-				this.#method="translatecaptionsto/"+targetLanguage;
+				this.#method="translatetexttrackto/"+targetLanguage;
 				if(role){
 					this.getParameters().set("role",role);
 				}
@@ -1140,11 +1140,11 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	removeCaptions(language="",role=captionroles.SUBTITLES){
+	removeTextTrack(language="",role=texttrackroles.SUBTITLES){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
 			if(language.length==2){
 				this._verb=defaults.VERB_DELETE;
-				this.#method="removecaptions";
+				this.#method="removetexttrack";
 				this.getParameters().set("language",language);
 				if(role){
 					this.getParameters().set("role",role);

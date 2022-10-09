@@ -3,7 +3,7 @@
 const types={
 	ALL:"all",
 	METADATA:"metadata",
-	CAPTIONS:"captions",
+	TEXTTRACKS:"texttracks",
 	COVER:"cover",
 	VIDEO:"video"
 };
