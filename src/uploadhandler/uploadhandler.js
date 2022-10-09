@@ -4,7 +4,7 @@ const {DomainCall} = require("../apicalls/domaincall");
 const {MediaManagementCall} = require("../apicalls/mediamanagementcall");
 const streamtypes=require("../enums/streamtypes");
 const covercontexts=require("../enums/covercontexts");
-const captionroles=require("../enums/captionroles");
+const texttrackroles=require("../enums/texttrackroles");
 
 const fs = require("fs");
 const path = require('path');
@@ -182,7 +182,7 @@ class UploadHandler{
 		return(isSuccess);
 	}
 
-    async addMediaCaptions(localPath,streamtype=streamtypes.VIDEO,mediaid=0,language='',role=captionroles.SUBTITLES){
+    async addMediaTextTrack(localPath,streamtype=streamtypes.VIDEO,mediaid=0,language='',role=texttrackroles.SUBTITLES){
 		let isSuccess=true;
         if(this.#apiclient){
 			if((localPath)&&(fs.existsSync(localPath))){
@@ -193,7 +193,7 @@ class UploadHandler{
 						if(azureupload){
                             let uploadcall=new MediaManagementCall();
                             uploadcall.setItem(mediaid,streamtype);
-                            uploadcall.addCaptionsFromURL(config.endpoint+"/"+config.file,language,"",role);
+                            uploadcall.addTextTrackFromURL(config.endpoint+"/"+config.file,language,"",role);
                             let uploadresult=await this.#apiclient.call(uploadcall);
                             if(uploadresult.isSuccess()){
                                 isSuccess=true;

@@ -1,7 +1,7 @@
 "use strict";
 
 const {Modifiers}=require("../../internals/modifiers");
-const captionformats=require("../../enums/captionformats");
+const texttrackformats=require("../../enums/texttrackformats");
 const connectedmediadetails=require("../../enums/connectedmediadetails");
 const commentcontexts=require("../../enums/commentcontexts");
 
@@ -182,11 +182,11 @@ class MediaModifiers extends Modifiers{
 		this._params['addHotSpots']=1;
 	}
 
-	addCaptions(format){
-		if(captionformats.getAllTypes().includes(format)){
-			this._params['addCaptions']=format;
+	addTextTracks(format){
+		if(texttrackformats.getAllTypes().includes(format)){
+			this._params['addTextTracks']=format;
 		}else{
-			throw new Error("CaptionFormat string is unknown");
+			throw new Error("TextTrackFormat string is unknown");
 		}
 	}
 
