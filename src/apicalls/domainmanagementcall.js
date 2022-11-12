@@ -14,7 +14,6 @@ class DomainManagementCall extends APICall{
 	constructor(){
         super();
     }
-
 	
 	getPath(){
 		this._path="manage/"+streamtypes.getPluralizedStreamtype(this.#streamtype)+"/"+(this.#item>0?this.#item+"/":"")+this.#method;
@@ -220,7 +219,7 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
-	addUploadLink(title="",selectedStreamtypes=[],language="",maxUsages=0,code="",useDomainStyle=false){
+	addUploadLink(title="",selectedStreamtypes=[],language="",maxUsages=0,code="",useDomainStyle=false, askForNotes=false){
 		this.#setStreamtype("uploadlink");
 		this._verb=defaults.VERB_POST;
 		this.#method="add";
@@ -256,6 +255,7 @@ class DomainManagementCall extends APICall{
 		if(useDomainStyle){
 			this.getParameters().set("useDomainStyle",1);
 		}
+		this.getParameters().set("askForNotes",(askForNotes?1:0));
 	}
 
 	deleteUploadLink(uploadLinkID=0){

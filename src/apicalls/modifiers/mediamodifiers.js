@@ -155,6 +155,10 @@ class MediaModifiers extends Modifiers{
 		this._params['addPreviewLinks']=1;
 	}
 
+	addDownloadLinks(){
+		this._params['addDownloadLinks']=1;
+	}
+
 	addBroadcastLinks(){
 		this._params['addBroadcastLinks']=1;
 	}

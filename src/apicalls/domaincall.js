@@ -117,12 +117,16 @@ class DomainCall extends APICall{
 		this._path+="previewlinks";
 	}
 
+	downloadLinks(){
+		this._path+="downloadlinks";
+	}
+
 	broadcastLinks(){
-		this._path+="previewlinks";
+		this._path+="broadcastlinks";
 	}
 
 	uploadLinks(){
-		this._path+="previewlinks";
+		this._path+="uploadlinks";
 	}
 
 	prices(){

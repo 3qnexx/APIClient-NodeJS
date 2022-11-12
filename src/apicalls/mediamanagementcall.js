@@ -75,7 +75,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createFromURL(url, useQueue=true, autoPublish=null, refnr="",queueStart=0, asVariantFor="", asVariantOf=0, sourceLanguage=""){
+	createFromURL(url, useQueue=true, autoPublish=null, refnr="",queueStart=0, asVariantFor="", asVariantOf=0, sourceLanguage="", notes=""){
 		if(streamtypes.getUploadableTypes().includes(this.#streamtype)){
 			if(url.startsWith("http")){
 				this._verb=defaults.VERB_POST;
@@ -83,6 +83,9 @@ class MediaManagementCall extends APICall{
 				this.getParameters().set("url",url);
 				if(refnr){
 					this.getParameters().set("refnr",refnr);
+				}
+				if(notes){
+					this.getParameters().set("notes",notes);
 				}
 				if(useQueue){
 					this.getParameters().set("useQueue",1);
@@ -788,10 +791,13 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	addItemPreviewLink(language="",maxStarts=0,code="",showAnnotations=true,allowAnnotations=true,allowSnapshots=false,allowSourceDownloads=false,useDomainStyle=false){
+	addItemPreviewLink(title,language="",maxStarts=0,code="",showAnnotations=true,allowAnnotations=true,allowSnapshots=false,allowSourceDownloads=false,useDomainStyle=false){
 		if(streamtypes.getPlayerTypes().includes(this.#streamtype)){
 			this._verb=defaults.VERB_POST;
 			this.#method="addpreviewlink";
+
+			this.getParameters().set("title",title);
+
 			if(language.length==2){
 				this.getParameters().set("language",language);
 			}
@@ -827,6 +833,39 @@ class MediaManagementCall extends APICall{
 			this.#method="removepreviewlink/"+previewlinkID;
 		}else{
 			throw new Error("the ID of the PreviewLink must be given.");
+		}
+	}
+
+	addItemDownloadLink(title,language="",maxStarts=0,code="",useDomainStyle=false){
+		if(streamtypes.getUploadableTypes().includes(this.#streamtype)){
+			this._verb=defaults.VERB_POST;
+			this.#method="adddownloadlink";
+
+			this.getParameters().set("title",title);
+
+			if(language.length==2){
+				this.getParameters().set("language",language);
+			}
+			if(maxStarts>0){
+				this.getParameters().set("maxStarts",maxStarts);
+			}
+			if(code){
+				this.getParameters().set("code",code);
+			}
+			if(useDomainStyle){
+				this.getParameters().set("useDomainStyle",1);
+			}
+		}else{
+			throw new Error("Streamtype must be in "+streamtypes.getUploadableTypes().join(","));
+		}
+	}
+
+	deleteItemDownloadLink(downloadlinkID=0){
+		if(downloadlinkID>0){
+			this._verb=defaults.VERB_DELETE;
+			this.#method="removedownloadlink/"+downloadlinkID;
+		}else{
+			throw new Error("the ID of the DownloadLink must be given.");
 		}
 	}
 
