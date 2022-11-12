@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+1.2.8 (2022-11-13)
+-------------------
+
+* the new Upload "Notes" are now available on all Upload Endpoints
+* the new DownloadLink System is now available and ready to use
+
 1.2.7 (2022-10-09)
 -------------------
 
