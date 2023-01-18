@@ -44,6 +44,10 @@ class DomainCall extends APICall{
 		this._path+="apps";
 	}
 
+	campaigns(){
+		this._path+="campaigns";
+	}
+
 	accounts(){
 		this._path+="accounts";
 	}
@@ -119,6 +123,10 @@ class DomainCall extends APICall{
 
 	downloadLinks(){
 		this._path+="downloadlinks";
+	}
+
+	dashboardLinks(){
+		this._path+="dashboardlinks";
 	}
 
 	broadcastLinks(){
@@ -211,6 +219,14 @@ class DomainCall extends APICall{
 		}
 		if(addCustomAttributes){
 			this.getParameters().set("addCustomAttributes",1);
+		}
+	}
+
+	textTemplate(reference){
+		if(reference){
+			this._path+="texttemplates/"+reference;
+		}else{
+			throw new Error("TextTemplates need a Reference");
 		}
 	}
 

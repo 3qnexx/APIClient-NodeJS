@@ -32,7 +32,6 @@ class MediaManagementCall extends APICall{
 		super();
 	}
 
-
 	getPath(){
 		this._path="manage/"+streamtypes.getPluralizedStreamtype(this.#streamtype)+"/"+(this.#item>0?this.#item+"/":"")+this.#method;
 		return(super.getPath());
@@ -97,7 +96,7 @@ class MediaManagementCall extends APICall{
 					this.getParameters().set('autoPublish',(autoPublish?1:0));
 				}
 				if((this.#streamtype==streamtypes.VIDEO)||(this.#streamtype==streamtypes.AUDIO)){
-					if(sourceLanguage.length==2){
+					if((sourceLanguage)&&(sourceLanguage.length==2)){
 						this.getParameters().set("language",sourceLanguage);
 					}
 				}
@@ -335,7 +334,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createSceneFromVideo(videoID=0,title="",from=0,until=0,purpose=scenepurposes.CHAPTER){
+	createSceneFromVideo(videoID=0,from=0,until=0,title="",purpose=scenepurposes.CHAPTER){
 		if(videoID>0){
 			this.setStreamtype(streamtypes.SCENE);
 			this._verb=defaults.VERB_POST;
@@ -351,6 +350,29 @@ class MediaManagementCall extends APICall{
 			}
 			if(scenepurposes.getAllTypes().includes(purpose)){
 				this.getParameters().set("purpose",purpose);
+			}
+		}else{
+			throw new Error("the Video ID must be given.");
+		}
+	}
+
+	createLivestreamFromVideo( videoID=0,liveConnection=0,startAt=0,title=''){
+		if(videoID>0){
+			this.setStreamtype(streamtypes.LIVE);
+			this._verb=defaults.VERB_POST;
+			this.#method="fromvideo/"+videoID;
+			if(liveConnection>0){
+				this.getParameters().set("liveConnection",liveConnection);
+			}else{
+				throw new Error("a valid liveConnection must be given");
+			}
+			if(startAt>0){
+				this.getParameters().set("startAt",startAt);
+			}else{
+				throw new Error("a valid start time for the LiveStream must be given");
+			}
+			if(title){
+				this.getParameters().set("title",title);
 			}
 		}else{
 			throw new Error("the Video ID must be given.");
@@ -383,7 +405,7 @@ class MediaManagementCall extends APICall{
 			this._verb=defaults.VERB_POST;
 			this.#method="fromtext";
 			this.getParameters().set("textcontent",textcontent);
-			if(language.length==2){
+			if((language)&&(language.length==2)){
 				this.getParameters().set("language",language);
 			}
 			if(title){
@@ -702,7 +724,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	exportItem(accountID,externalCategory="",externalState=externalstates.PUBLIC, postText="",publicationDate=0,inVariant=0,list=0, platformContext=""){
+	exportItem(accountID,externalCategory="",externalState=externalstates.PUBLIC, postText="",publicationDate=0,inVariant=0,list=0, platformContext="", metadataLanguage=""){
 		if(accountID>0){
 			if(streamtypes.getExportableTypes().includes(this.#streamtype)){
 				this._verb=defaults.VERB_POST;
@@ -719,6 +741,9 @@ class MediaManagementCall extends APICall{
 				}
 				if((publicationDate>0)&&(externalState==externalstates.PRIVATE)){
 					this.getParameters().set("publicationDate",publicationDate);
+				}
+				if((metadataLanguage)&&(metadataLanguage.length==2)){
+					this.getParameters().set("metadataLanguage",metadataLanguage);
 				}
 				if((this.#streamtype==streamtypes.VIDEO)&&(platformContext!="")&&(externalplatformcontexts.getAllTypes.includes(platformContext))){
 					this.getParameters().set("platformContext",platformContext);
@@ -791,14 +816,14 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	addItemPreviewLink(title,language="",maxStarts=0,code="",showAnnotations=true,allowAnnotations=true,allowSnapshots=false,allowSourceDownloads=false,useDomainStyle=false){
+	addItemPreviewLink(title,language="",maxStarts=0,code="",showAnnotations=true,allowAnnotations=true,allowSnapshots=false,allowSourceDownloads=false,useDomainStyle=false,fileType=''){
 		if(streamtypes.getPlayerTypes().includes(this.#streamtype)){
 			this._verb=defaults.VERB_POST;
 			this.#method="addpreviewlink";
 
 			this.getParameters().set("title",title);
 
-			if(language.length==2){
+			if((language)&&(language.length==2)){
 				this.getParameters().set("language",language);
 			}
 			if(maxStarts>0){
@@ -806,6 +831,9 @@ class MediaManagementCall extends APICall{
 			}
 			if(code){
 				this.getParameters().set("code",code);
+			}
+			if(fileType){
+				this.getParameters().set("fileType",fileType);
 			}
 			if(showAnnotations){
 				this.getParameters().set("showAnnotations",1);
@@ -837,13 +865,13 @@ class MediaManagementCall extends APICall{
 	}
 
 	addItemDownloadLink(title,language="",maxStarts=0,code="",useDomainStyle=false){
-		if(streamtypes.getUploadableTypes().includes(this.#streamtype)){
+		if(streamtypes.getDownloadLinkTypes().includes(this.#streamtype)){
 			this._verb=defaults.VERB_POST;
 			this.#method="adddownloadlink";
 
 			this.getParameters().set("title",title);
 
-			if(language.length==2){
+			if((language)&&(language.length==2)){
 				this.getParameters().set("language",language);
 			}
 			if(maxStarts>0){
@@ -1135,7 +1163,7 @@ class MediaManagementCall extends APICall{
 				this._verb=defaults.VERB_POST;
 				this.#method="texttrackfromurl";
 				this.getParameters().set("url",url);
-				if(language.length==2){
+				if((language)&&(language.length==2)){
 					this.getParameters().set("language",language);
 				}else{
 					throw new Error("language must be given in 2-Letter-Code");
@@ -1165,7 +1193,7 @@ class MediaManagementCall extends APICall{
 
 	translateTextTrackTo(targetLanguage="",role=texttrackroles.SUBTITLES){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
-			if(language.length==2){
+			if((language)&&(language.length==2)){
 				this._verb=defaults.VERB_POST;
 				this.#method="translatetexttrackto/"+targetLanguage;
 				if(role){
@@ -1181,7 +1209,7 @@ class MediaManagementCall extends APICall{
 
 	removeTextTrack(language="",role=texttrackroles.SUBTITLES){
 		if([streamtypes.VIDEO,streamtypes.AUDIO].includes(this.#streamtype)){
-			if(language.length==2){
+			if((language)&&(language.length==2)){
 				this._verb=defaults.VERB_DELETE;
 				this.#method="removetexttrack";
 				this.getParameters().set("language",language);
@@ -1197,7 +1225,7 @@ class MediaManagementCall extends APICall{
 	}
 
 	translateMetadataTo(language){
-		if(language.length==2){
+		if((language)&&(language.length==2)){
 			this._verb=defaults.VERB_POST;
 			this.#method="translateto/"+language;
 		}else{
@@ -1206,7 +1234,7 @@ class MediaManagementCall extends APICall{
 	}
 
 	addTranslation(language,title="",subtitle="",teaser="",description="", orderhint=""){
-		if(language.length==2){
+		if((language)&&(language.length==2)){
 			this._verb=defaults.VERB_POST;
 			this.#method="addtranslation";
 			this.getParameters().set("language",language);
@@ -1231,7 +1259,7 @@ class MediaManagementCall extends APICall{
 	}
 
 	updateTranslation(language,title="",subtitle="",teaser="",description="", orderhint=""){
-		if(language.length==2){
+		if((language)&&(language.length==2)){
 			this._verb=defaults.VERB_PUT;
 			this.#method="updatetranslation";
 			this.getParameters().set("language",language);
@@ -1256,7 +1284,7 @@ class MediaManagementCall extends APICall{
 	}
 
 	removeTranslation(language){
-		if(language.length==2){
+		if((language)&&(language.length==2)){
 			this._verb=defaults.VERB_DELETE;
 			this.#method="removetranslation";
 			this.getParameters().set("language",language);

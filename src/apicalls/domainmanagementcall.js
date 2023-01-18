@@ -243,7 +243,7 @@ class DomainManagementCall extends APICall{
 				this.getParameters().set("selectedStreamtypes",arr.join(','));
 			}
 		}
-		if(language.length==2){
+		if((language)&&(language.length==2)){
 			this.getParameters().set("language",language);
 		}
 		if(maxUsages>0){

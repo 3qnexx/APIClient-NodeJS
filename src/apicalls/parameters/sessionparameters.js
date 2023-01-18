@@ -30,6 +30,14 @@ class SessionParameters extends Parameters{
 		this.set('nxp_afpc',code);
 	}
 
+	setCampaign(campaign){
+		this.set('campaign',campaign);
+	}
+
+	setCampaignCode(code){
+		this.set('nxp_cmpc',code);
+	}
+
 	setDeviceName(name){
 		this.set('deviceName',name);
 	}

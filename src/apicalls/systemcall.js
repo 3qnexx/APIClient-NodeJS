@@ -68,14 +68,6 @@ class SystemCall extends APICall{
 		}
 	}
 
-	openOperations(){
-		this._path+="openoperations";
-	}
-
-	operationStateFor(id){
-		this._path+="operationstate/"+id;
-	}
-
 	currentIncidents(){
 		this._path+="currentincidents";
 	}
