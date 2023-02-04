@@ -92,6 +92,10 @@ class MediaCall extends APICall{
 		this._method="evergreens";
 	}
 
+	topSlider(){
+		this._method="topslider";
+	}
+
 	forKids(){
 		this._method="forkids";
 	}

@@ -20,8 +20,9 @@ class APIResult{
                     this.#metadata=new MetaData(response.data.metadata);
                 }
                 if(this.isSuccess()){
-                    if(response.data.hasOwnProperty("paging")){
-                        this.#paging=new Paging(response.data.paging,response.data.result.length);
+                    let pagingKey=(this.#metadata.getAPIVersion()=='4.0'?'pagination':'paging');
+                    if(response.data.hasOwnProperty(pagingKey)){
+                        this.#paging=new Paging(response.data[pagingKey],response.data.result.length,this.#metadata.getAPIVersion());
                     }
                 }
             }

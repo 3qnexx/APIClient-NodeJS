@@ -3,10 +3,12 @@
 class Paging{
     #data;
     #size;
+	#apiVersion;
 
-    constructor(data,size){
+    constructor(data,size,apiVersion){
         this.#data=data;
         this.#size=size;
+		this.#apiVersion=apiVersion;
     }
 
     updateSize(size){
@@ -14,7 +16,11 @@ class Paging{
 	}
 
 	getStart(){
-		return(this.#data['start']);
+		return(this.#data[(this.#apiVersion=='4.0'?'offset':'start')]);
+	}
+
+	getOffset(){
+		return(this.getStart());
 	}
 
 	getLimit(){
@@ -26,7 +32,7 @@ class Paging{
 	}
 
 	getTotalSize(){
-		return(this.#data['resultcount']);
+		return(this.#data[(this.#apiVersion=='4.0'?'total':'resultcount')]);
 	}
 
 	hasMoreResults(){
