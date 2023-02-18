@@ -1149,10 +1149,6 @@ class MediaManagementCall extends APICall{
 		this.#handleCover("banner",url,description,assetLanguage,fromTime);
 	}
 
-	setItemCoverFamilySafe(url="", description="",assetLanguage="",fromTime=0){
-		this.#handleCover("familysafe",url,description,assetLanguage,fromTime);
-	}
-
 	setItemCoverArtwork(url=""){
 		this.#handleCover("artwork",url,"",0);
 	}
