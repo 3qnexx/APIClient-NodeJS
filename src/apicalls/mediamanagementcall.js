@@ -724,7 +724,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	exportItem(accountID,externalCategory="",externalState=externalstates.PUBLIC, postText="",publicationDate=0,inVariant=0,list=0, platformContext="", metadataLanguage=""){
+	exportItem(accountID,externalCategory="",externalState=externalstates.PUBLIC, postText="",publicationDate=0,inVariant=0,list=0, platformContext=""){
 		if(accountID>0){
 			if(streamtypes.getExportableTypes().includes(this.#streamtype)){
 				this._verb=defaults.VERB_POST;
@@ -741,9 +741,6 @@ class MediaManagementCall extends APICall{
 				}
 				if((publicationDate>0)&&(externalState==externalstates.PRIVATE)){
 					this.getParameters().set("publicationDate",publicationDate);
-				}
-				if((metadataLanguage)&&(metadataLanguage.length==2)){
-					this.getParameters().set("metadataLanguage",metadataLanguage);
 				}
 				if((this.#streamtype==streamtypes.VIDEO)&&(platformContext!="")&&(externalplatformcontexts.getAllTypes.includes(platformContext))){
 					this.getParameters().set("platformContext",platformContext);
