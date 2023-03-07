@@ -1420,6 +1420,26 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
+	addLicenseNote(note){
+		if(note){
+			this._verb=defaults.VERB_POST;
+			this.#method="addlicensenote";
+			this.getParameters().set("note",note);
+		}else{
+			throw new Error("Note cant be empty");
+		}
+	}
+
+	removeLicenseNote(licensenoteid){
+		if(licensenoteid){
+			this._verb=defaults.VERB_DELETE;
+			this.#method="removelicensenote";
+			this.getParameters().set("licensenoteid",licensenoteid);
+		}else{
+			throw new Error("LicenseNote ID cant be empty");
+		}
+	}
+
 	addAward(award,category="",date="",state=""){
 		if(award){
 			this._verb=defaults.VERB_POST;
