@@ -588,11 +588,11 @@ class MediaManagementCall extends APICall{
 		this.#method="publish";
 	}
 
-	unpublishItem(blockFuturePublishing=null){
+	unpublishItem(blockFuturePublishing=false){
 		this._verb=defaults.VERB_PUT;
 		this.#method="unpublish";
-		if(blockFuturePublishing!==null){
-			this.getParameters().set("blockFuturePublishing",(blockFuturePublishing?1:0));
+		if(blockFuturePublishing){
+			this.getParameters().set("blockFuturePublishing",1);
 		}
 	}
 
