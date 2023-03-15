@@ -7,6 +7,8 @@ const types={
 	VIMEO:'vimeo',
 	YOUTUBE:'youtube',
 	TIKTOK:'tiktok',
+	LINKEDIN:'linkedin',
+	MASTODON:'mastodon',
 	EXTERNALVIEW:'externalview'
 };
 

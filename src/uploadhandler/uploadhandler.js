@@ -154,9 +154,6 @@ class UploadHandler{
 								case covercontexts.QUAD:
 									uploadcall.setItemCoverQuad(url,coverDescription,assetLanguage);
 								break;
-								case covercontexts.FAMILYSAFE:
-									uploadcall.setItemCoverFamilySafe(url,coverDescription,assetLanguage);
-								break;
 							}
 							let uploadresult=await this.#apiclient.call(uploadcall);
                             if(uploadresult.isSuccess()){

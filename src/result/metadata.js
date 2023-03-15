@@ -2,13 +2,19 @@
 
 class MetaData{
     #data;
+	#apiVersion;
 
     constructor(data){
         this.#data=data;
+		if((data)&&(data.hasOwnProperty('version'))){
+			this.#apiVersion="4.0";
+		}else{
+			this.#apiVersion=this.getAPIVersion();
+		}
     }
 
 	updateProcessingTime(time){
-		this.#data['processingtime']=time;
+		this.#data[(this.#apiVersion=='4.0'?'processingTime':'processingtime')]=time;
 	}
 
     getCode(){
@@ -16,7 +22,7 @@ class MetaData{
 	}
 
 	getAPIVersion(){
-		return(this.#data['apiversion']);
+		return(this.#data[(this.#apiVersion=='4.0'?'version':'apiversion')]);
 	}
 
 	getVerb(){
@@ -24,23 +30,27 @@ class MetaData{
 	}
 
 	getProcessingTime(){
-		return(parseFloat(this.#data['processingtime']));
+		return(parseFloat(this.#data[(this.#apiVersion=='4.0'?'processingTime':'processingtime')]));
 	}
 
 	getCalledWithPath(){
-		return(this.#data['calledwith']);
+		return(this.#data[(this.#apiVersion=='4.0'?'calledWith':'calledwith')]);
 	}
 
 	getCalledForDomain(){
-		return(parseInt(this.#data['fordomain']));
+		return(parseInt(this.#data[(this.#apiVersion=='4.0'?'forDomain':(this.#apiVersion=='3.0'?'forclient':'fordomain'))]));
 	}
 
 	getCalledForContext(){
-		return(this.#data['calledfor']);
+		return(this.#data[(this.#apiVersion=='4.0'?'calledFor':'calledfor')]);
+	}
+
+	getIsFromCache(){
+		return(this.#data['fromCache']);
 	}
 
 	getErrorHint(){
-		return(this.#data['errorhint']);
+		return(this.#data[(this.#apiVersion=='4.0'?'errorHint':'errorhint')]);
 	}
 
 	getNotice(){

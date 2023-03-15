@@ -170,6 +170,10 @@ class MediaParameters extends Parameters{
 		}
 	}
 
+	applyContentModerationFilters(){
+		this._params['applyContentModerationFilters']=1;
+	}
+
 	excludeItems(list){
 		if(Array.isArray(list)){
 			this._params['excludeItems']=list.join(",");

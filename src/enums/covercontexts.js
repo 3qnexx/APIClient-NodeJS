@@ -6,8 +6,7 @@ const types={
 	ABTEST:'abtest',
 	BANNER:'banner',
 	ACTIONSHOT:'actionshot',
-	QUAD:'quad',
-	FAMILYSAFE:'familysafe'
+	QUAD:'quad'
 };
 
 function getAllTypes(){

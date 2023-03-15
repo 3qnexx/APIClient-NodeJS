@@ -248,6 +248,14 @@ class StatisticsCall extends APICall{
 		this._path+="distributionbybrowser";
 	}
 
+	distributionByDeliveryDomain(){
+		this._path+="distributionbydeliverydomain";
+	}
+
+	distributionBySlug(){
+		this._path+="distributionbyslug";
+	}
+
 	distributionByPodcastApp(){
 		this._path+="distributionbypodcastapp";
 	}

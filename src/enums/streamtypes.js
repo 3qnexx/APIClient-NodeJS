@@ -28,6 +28,10 @@ const types={
     GROUP:'group',
     SHOW:'show',
     TEAM:'team',
+    POLL:'poll',
+    FORM:'form',
+    VOTING:'voting',
+    VARIANT:'variant',
     ALLMEDIA:'allmedia'
 };
 
@@ -52,15 +56,25 @@ function getPluralizedStreamtype(streamtype){
 }
 
 function getAllTypes(){
-    return(Object.values(types));
+    let toreturn=[];
+    Object.values(types).forEach((t)=>{
+        if(![types.VARIANT].includes(t)){
+            toreturn.push(t);
+        }
+    });
+    return(toreturn);
 }
 
 function getUploadableTypes(){
     return([types.VIDEO,types.AUDIO,types.IMAGE,types.FILE]);
 }
 
+function getDownloadLinkTypes(){
+    return([types.VIDEO,types.AUDIO,types.IMAGE,types.FILE,types.SCENE,types.VARIANT]);
+}
+
 function getPlayerTypes(){
-    return([types.VIDEO,types.PLAYLIST,types.SET,types.COLLECTION,types.AUDIO,types.RADIO,types.AUDIOALBUM,types.LIVE,types.SCENE,types.RACK]);
+    return([types.VIDEO,types.PLAYLIST,types.SET,types.COLLECTION,types.AUDIO,types.RADIO,types.AUDIOALBUM,types.LIVE,types.SCENE,types.RACK,types.VARIANT]);
 }
 
 function getContainerTypes(){
@@ -79,6 +93,7 @@ module.exports=types;
 module.exports.getAllTypes=getAllTypes;
 module.exports.getPluralizedStreamtype=getPluralizedStreamtype;
 module.exports.getUploadableTypes=getUploadableTypes;
+module.exports.getDownloadLinkTypes=getDownloadLinkTypes;
 module.exports.getPlayerTypes=getPlayerTypes;
 module.exports.getContainerTypes=getContainerTypes;
 module.exports.getSimpleContainerTypes=getSimpleContainerTypes;

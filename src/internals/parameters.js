@@ -127,6 +127,7 @@ class Parameters{
 
 	setStart(start){
 		this.set('start',start);
+		this.set('offset',start);
 	}
 
 	get(){

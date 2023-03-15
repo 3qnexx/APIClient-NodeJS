@@ -60,8 +60,8 @@ class MediaCall extends APICall{
 		this._method="byhash/"+hash;
 	}
 
-	byRefNr(refnr){
-		this._method="byrefnr/"+refnr;
+	byReference(refnr){
+		this._method="byreference/"+refnr;
 	}
 
 	bySlug(slug){
@@ -90,6 +90,10 @@ class MediaCall extends APICall{
 
 	evergreens(){
 		this._method="evergreens";
+	}
+
+	topSlider(){
+		this._method="topslider";
 	}
 
 	forKids(){
@@ -338,6 +342,14 @@ class MediaCall extends APICall{
 		this.#verifyParameter("bymagazine",magazineid,[streamtypes.ARTICLE]);
 	}
 
+	byRack(rackid){
+		this.#verifyParameter("byrack",rackid,[streamtypes.VIDEO,streamtypes.LIVE,streamtypes.SCENE]);
+	}
+
+	byVariant(variantid){
+		this.#verifyParameter("byvariant",variantid,[streamtypes.VIDEO]);
+	}
+
 	byVideo(videoid){
 		this.#verifyParameter("byvideo",videoid,[streamtypes.SCENE]);
 	}
@@ -373,6 +385,10 @@ class MediaCall extends APICall{
 
 	nextInSeries(videoid){
 		this.#verifyParameter("nextinseries",videoid,[streamtypes.VIDEO]);
+	}
+
+	latestOpen(){
+		this.#verifyParameter("latestopen",0,[streamtypes.POLL,streamtypes.VOTING],true);
 	}
 
 	userHistory(excludeCompleted){

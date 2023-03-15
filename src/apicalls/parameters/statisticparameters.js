@@ -95,6 +95,10 @@ class StatisticParameters extends Parameters{
 		this.set('affiliatePartner',parter);
 	}
 
+	restrictToCampaign(campaign){
+		this.set('campaign',campaign);
+	}
+
 	restrictToLicensor(licensor){
 		this.set('licensor',licensor);
 	}
