@@ -1,8 +1,6 @@
 "use strict";
 
 const packageDetails=require('./package.json');
-const fetch=require("node-fetch");
-const AbortController=require("abort-controller");
 const crypto=require("crypto");
 
 const {UploadHandler}=require("./src/uploadhandler/uploadhandler");
