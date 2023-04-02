@@ -94,6 +94,10 @@ class StatisticsCall extends APICall{
 		this._path+="adclicksbyday";
 	}
 
+	adErrorsByDay(){
+		this._path+="aderrorsbyday";
+	}
+
 	loginsByDay(provider=""){
 		this._path+="loginsbyday";
 		if(provider){

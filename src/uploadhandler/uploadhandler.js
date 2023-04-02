@@ -122,7 +122,7 @@ class UploadHandler{
 		return(isSuccess);
 	}
 
-    async setMediaCover(localPath,streamtype=streamtypes.VIDEO,mediaid=0,coverContext=covercontexts.COVER,coverDescription="",assetLanguage=""){
+    async setMediaCover(localPath,streamtype=streamtypes.VIDEO,mediaid=0,coverContext=covercontexts.COVER,coverDescription="",coverCopyright="",assetLanguage=""){
 		let isSuccess=false;
         if(this.#apiclient){
 			if((localPath)&&(fs.existsSync(localPath))){
@@ -137,22 +137,22 @@ class UploadHandler{
 
 							switch(coverContext){
 								case covercontexts.COVER:
-									uploadcall.setItemCover(url,coverDescription,assetLanguage);
+									uploadcall.setItemCover(url,coverDescription,coverCopyright,assetLanguage);
 								break;
 								case covercontexts.ALTERNATIVE:
-									uploadcall.setItemCoverAlternative(url,coverDescription,assetLanguage);
+									uploadcall.setItemCoverAlternative(url,coverDescription,coverCopyright,assetLanguage);
 								break;
 								case covercontexts.ABTEST:
-									uploadcall.setItemCoverABTest(url,coverDescription,assetLanguage);
+									uploadcall.setItemCoverABTest(url,coverDescription,coverCopyright,assetLanguage);
 								break;
 								case covercontexts.ACTIONSHOT:
-									uploadcall.setItemCoverActionShot(url,coverDescription,assetLanguage);
+									uploadcall.setItemCoverActionShot(url,coverDescription,coverCopyright,assetLanguage);
 								break;
 								case covercontexts.BANNER:
-									uploadcall.setItemCoverBanner(url,coverDescription,assetLanguage);
+									uploadcall.setItemCoverBanner(url,coverDescription,coverCopyright,assetLanguage);
 								break;
 								case covercontexts.QUAD:
-									uploadcall.setItemCoverQuad(url,coverDescription,assetLanguage);
+									uploadcall.setItemCoverQuad(url,coverDescription,coverCopyright,assetLanguage);
 								break;
 							}
 							let uploadresult=await this.#apiclient.call(uploadcall);

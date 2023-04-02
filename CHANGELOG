@@ -1,6 +1,13 @@
 CHANGELOG
 =========
 
+1.3.1 (2023-04-02)
+-------------------
+
+* adding Support for Asset Copyright and AI-Generated Attributes
+  * Breaking: the Order of Parameters in ALL Cover Upload Methods has been changed!
+* Bugfixes
+
 1.3.0 (2023-03-15)
 -------------------
 

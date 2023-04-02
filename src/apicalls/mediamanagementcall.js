@@ -54,21 +54,35 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	#handleCover(method,url="",description="",assetLanguage="",fromTime=0){
+	#handleCover(method,url="",description="",copyright="",assetLanguage="",isAIGenerated=false,fromTime=0){
 		if(url.startsWith("http")){
 			this._verb=defaults.VERB_POST;
 			this.#method=method;
 			this.getParameters().set("url",url);
+			this.getParameters().set("isAIGenerated",(isAIGenerated?0:1));
 			if(description){
 				this.getParameters().set("description",description);
+			}
+			if(copyright){
+				this.getParameters().set("copyright",copyright);
 			}
 			if(assetLanguage){
 				this.getParameters().set("assetLanguage",assetLanguage);
 			}
-		}else if((fromTime>0)&&(in_array(this.#streamtype,[streamtypes.VIDEO,streamtypes.SCENE,'variant']))){
+		}else if((fromTime>0)&&([streamtypes.VIDEO,streamtypes.SCENE,streamtypes.VARIANT].includes(this.#streamtype))){
 			this._verb=defaults.VERB_POST;
 			this.#method=method;
 			this.getParameters().set("fromTime",fromTime);
+			this.getParameters().set("isAIGenerated",(isAIGenerated?0:1));
+			if(description){
+				this.getParameters().set("description",description);
+			}
+			if(copyright){
+				this.getParameters().set("copyright",copyright);
+			}
+			if(assetLanguage){
+				this.getParameters().set("assetLanguage",assetLanguage);
+			}
 		}else{
 			throw new Error("a valid Cover URL or TimeStamp (on Video Streamtypes only).");
 		}
@@ -1122,32 +1136,32 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	setItemCover(url="", description="",assetLanguage="",fromTime=0){
-		this.#handleCover("cover",url,description,assetLanguage,fromTime);
+	setItemCover(url="", description="",copyright="",assetLanguage="",isAIGenerated=false,fromTime=0){
+		this.#handleCover("cover",url,description,copyright,assetLanguage,isAIGenerated,fromTime);
 	}
 
-	setItemCoverAlternative(url="", description="",assetLanguage="",fromTime=0){
-		this.#handleCover("alternativecover",url,description,assetLanguage,fromTime);
+	setItemCoverAlternative(url="", description="",copyright="",assetLanguage="",isAIGenerated=false,fromTime=0){
+		this.#handleCover("alternativecover",url,description,copyright,assetLanguage,isAIGenerated,fromTime);
 	}
 
-	setItemCoverABTest(url="", description="",assetLanguage="",fromTime=0){
-		this.#handleCover("abtestalternative",url,description,assetLanguage,fromTime);
+	setItemCoverABTest(url="", description="",copyright="",assetLanguage="",isAIGenerated=false,fromTime=0){
+		this.#handleCover("abtestalternative",url,description,copyright,assetLanguage,isAIGenerated,fromTime);
 	}
 
-	setItemCoverActionShot(url="", description="",assetLanguage="",fromTime=0){
-		this.#handleCover("actionshot",url,description,assetLanguage,fromTime);
+	setItemCoverActionShot(url="", description="",copyright="",assetLanguage="",isAIGenerated=false,fromTime=0){
+		this.#handleCover("actionshot",url,description,copyright,assetLanguage,isAIGenerated,fromTime);
 	}
 
-	setItemCoverQuad(url="", description="",assetLanguage="",fromTime=0){
-		this.#handleCover("quadcover",url,description,assetLanguage,fromTime);
+	setItemCoverQuad(url="", description="",copyright="",assetLanguage="",isAIGenerated=false,fromTime=0){
+		this.#handleCover("quadcover",url,description,copyright,assetLanguage,isAIGenerated,fromTime);
 	}
 
-	setItemCoverBanner(url="", description="",assetLanguage="",fromTime=0){
-		this.#handleCover("banner",url,description,assetLanguage,fromTime);
+	setItemCoverBanner(url="", description="",copyright="",assetLanguage="",isAIGenerated=false,fromTime=0){
+		this.#handleCover("banner",url,description,copyright,assetLanguage,isAIGenerated,fromTime);
 	}
 
-	setItemCoverArtwork(url=""){
-		this.#handleCover("artwork",url,"",0);
+	setItemCoverArtwork(url="", description="",copyright="",assetLanguage="",isAIGenerated=false){
+		this.#handleCover("artwork",url,description,copyright,assetLanguage,isAIGenerated);
 	}
 
 	addTextTrackFromURL(url="",language="",title="",role=texttrackroles.SUBTITLES){
@@ -1449,7 +1463,7 @@ class MediaManagementCall extends APICall{
 				this.getParameters().set("category",category);
 			}
 			if(state){
-				if(in_array(state,awardstates.getAllTypes())){
+				if(awardstates.getAllTypes().includes(state)){
 					this.getParameters().set("state",state);
 				}else{
 					throw new Error("state must be in "+awardstates.getAllTypes().join(', '));
@@ -1479,7 +1493,7 @@ class MediaManagementCall extends APICall{
 				this.getParameters().set("category",category);
 			}
 			if(state){
-				if(in_array(state,awardstates.getAllTypes())){
+				if(awardstates.getAllTypes().includes(state)){
 					this.getParameters().set("state",state);
 				}else{
 					throw new Error("state must be in "+awardstates.getAllTypes().join(','));
