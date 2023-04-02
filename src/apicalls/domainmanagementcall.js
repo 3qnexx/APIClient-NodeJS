@@ -99,7 +99,7 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
-	setChannelCover(channelID=0,url="", description=""){
+	setChannelCover(channelID=0,url="", description="",copyright="",isAIGenerated=false){
 		if(channelID){
 			if(url){
 				this.#setItem(formatID,"channel");
@@ -108,6 +108,10 @@ class DomainManagementCall extends APICall{
 				if(description){
 					this.getParameters().set("description",description);
 				}
+				if(copyright){
+					this.getParameters().set("copyright",copyright);
+				}
+				this.getParameters().set("isAIGenerated",(isAIGenerated?1:0));
 			}else{
 				throw new Error("URL cant be empty");
 			}
@@ -116,7 +120,7 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
-	setChannelCoverActionShot(channelID=0,url="", description=""){
+	setChannelCoverActionShot(channelID=0,url="", description="",copyright="",isAIGenerated=false){
 		if(channelID){
 			if(url){
 				this.#setItem(formatID,"channel");
@@ -125,6 +129,10 @@ class DomainManagementCall extends APICall{
 				if(description){
 					this.getParameters().set("description",description);
 				}
+				if(copyright){
+					this.getParameters().set("copyright",copyright);
+				}
+				this.getParameters().set("isAIGenerated",(isAIGenerated?1:0));
 			}else{
 				throw new Error("URL cant be empty");
 			}
@@ -175,7 +183,7 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
-	setFormatCover(formatID=0,url="", description=""){
+	setFormatCover(formatID=0,url="", description="",copyright="",isAIGenerated=false){
 		if(formatID){
 			if(url){
 				this.#setItem(formatID,"format");
@@ -184,6 +192,10 @@ class DomainManagementCall extends APICall{
 				if(description){
 					this.getParameters().set("description",description);
 				}
+				if(copyright){
+					this.getParameters().set("copyright",copyright);
+				}
+				this.getParameters().set("isAIGenerated",(isAIGenerated?1:0));
 			}else{
 				throw new Error("URL cant be empty");
 			}
@@ -192,7 +204,7 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
-	setFormatCoverActionShot(formatID=0,url="", description=""){
+	setFormatCoverActionShot(formatID=0,url="", description="",copyright="",isAIGenerated=false){
 		if(formatID){
 			if(url){
 				this.#setItem(formatID,"format");
@@ -201,6 +213,10 @@ class DomainManagementCall extends APICall{
 				if(description){
 					this.getParameters().set("description",description);
 				}
+				if(copyright){
+					this.getParameters().set("copyright",copyright);
+				}
+				this.getParameters().set("isAIGenerated",(isAIGenerated?1:0));
 			}else{
 				throw new Error("URL cant be empty");
 			}
@@ -310,7 +326,7 @@ class DomainManagementCall extends APICall{
 		}
 	}
 
-	#setCategoryCover(streamtype="",categoryID=0,url="", description=""){
+	#setCategoryCover(streamtype="",categoryID=0,url="", description="", copyright="",isAIGenerated=false){
 		if(categoryID){
 			if(url){
 				this.#setItem(categoryID,streamtype+"category");
@@ -319,6 +335,10 @@ class DomainManagementCall extends APICall{
 				if(description){
 					this.getParameters().set("description",description);
 				}
+				if(copyright){
+					this.getParameters().set("copyright",copyright);
+				}
+				this.getParameters().set("isAIGenerated",(isAIGenerated?1:0));
 			}else{
 				throw new Error("URL cant be empty");
 			}
@@ -423,36 +443,36 @@ class DomainManagementCall extends APICall{
 		this.#deleteCategory(streamtypes.PRODUCT,categoryID);
 	}
 
-	setVideoCategoryCover(categoryID=0,url="",description=""){
-		this.#setCategoryCover(streamtypes.VIDEO,categoryID,url,description);
+	setVideoCategoryCover(categoryID=0,url="",description="",copyright="",isAIGenerated=false){
+		this.#setCategoryCover(streamtypes.VIDEO,categoryID,url,description,copyright,isAIGenerated);
 	}
 
-	setAudioCategoryCover(categoryID=0,url="",description=""){
-		this.#setCategoryCover(streamtypes.AUDIO,categoryID,url,description);
+	setAudioCategoryCover(categoryID=0,url="",description="",copyright="",isAIGenerated=false){
+		this.#setCategoryCover(streamtypes.AUDIO,categoryID,url,description,copyright,isAIGenerated);
 	}
 
-	setImageCategoryCover(categoryID=0,url="",description=""){
-		this.#setCategoryCover(streamtypes.IMAGE,categoryID,url,description);
+	setImageCategoryCover(categoryID=0,url="",description="",copyright="",isAIGenerated=false){
+		this.#setCategoryCover(streamtypes.IMAGE,categoryID,url,description,copyright,isAIGenerated);
 	}
 
-	setArticleCategoryCover(categoryID=0,url="",description=""){
-		this.#setCategoryCover(streamtypes.ARTICLE,categoryID,url,description);
+	setArticleCategoryCover(categoryID=0,url="",description="",copyright="",isAIGenerated=false){
+		this.#setCategoryCover(streamtypes.ARTICLE,categoryID,url,description,copyright,isAIGenerated);
 	}
 
-	setEventCategoryCover(categoryID=0,url="",description=""){
-		this.#setCategoryCover(streamtypes.EVENT,categoryID,url,description);
+	setEventCategoryCover(categoryID=0,url="",description="",copyright="",isAIGenerated=false){
+		this.#setCategoryCover(streamtypes.EVENT,categoryID,url,description,copyright,isAIGenerated);
 	}
 
-	setFileCategoryCover(categoryID=0,url="",description=""){
-		this.#setCategoryCover(streamtypes.FILE,categoryID,url,description);
+	setFileCategoryCover(categoryID=0,url="",description="",copyright="",isAIGenerated=false){
+		this.#setCategoryCover(streamtypes.FILE,categoryID,url,description,copyright,isAIGenerated);
 	}
 
-	setPlaceCategoryCover(categoryID=0,url="",description=""){
-		this.#setCategoryCover(streamtypes.PLACE,categoryID,url,description);
+	setPlaceCategoryCover(categoryID=0,url="",description="",copyright="",isAIGenerated=false){
+		this.#setCategoryCover(streamtypes.PLACE,categoryID,url,description,copyright,isAIGenerated);
 	}
 
-	setProductCategoryCover(categoryID=0,url="",description=""){
-		this.#setCategoryCover(streamtypes.PRODUCT,categoryID,url,description);
+	setProductCategoryCover(categoryID=0,url="",description="",copyright="",isAIGenerated=false){
+		this.#setCategoryCover(streamtypes.PRODUCT,categoryID,url,description,copyright,isAIGenerated);
 	}
 
 }
