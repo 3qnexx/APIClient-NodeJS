@@ -18,6 +18,14 @@ class SystemCall extends APICall{
 		this._path+="audiogenres";
 	}
 
+	videoContentTypes(){
+		this._path+="videocontenttypes";
+	}
+
+	imageContentTypes(){
+		this._path+="imagecontenttypes";
+	}
+
 	youtubeCategories(){
 		this._path+="youtubecategories";
 	}
