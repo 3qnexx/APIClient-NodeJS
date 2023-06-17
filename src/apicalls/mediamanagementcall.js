@@ -1,7 +1,7 @@
 "use strict";
 
 const {APICall}=require("../internals/apicall");
-const tools=require("../internals/tools");
+const {Tools}=require("../internals/tools");
 const defaults=require("../enums/defaults");
 const streamtypes=require("../enums/streamtypes");
 const exportparts=require("../enums/exportparts");
@@ -1470,7 +1470,7 @@ class MediaManagementCall extends APICall{
 				}
 			}
 			if(date){
-				if(tools.dateIsValid(date)){
+				if(Tools.dateIsValid(date)){
 					this.getParameters().set("date",date);
 				}else{
 					throw new Error("Date must be in YYYY-MM-DD format");
@@ -1500,7 +1500,7 @@ class MediaManagementCall extends APICall{
 				}
 			}
 			if(date){
-				if(tools.dateIsValid(date)){
+				if(Tools.dateIsValid(date)){
 					this.getParameters().set("date",date);
 				}else{
 					throw new Error("Date must be in YYYY-MM-DD format");

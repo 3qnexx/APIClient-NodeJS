@@ -37,7 +37,7 @@ class Tools{
 		return((this.isManageCall(endpoint))||(this.isStatisticsCall(endpoint)));
 	}
 
-	dateIsValid(datestring){
+	static dateIsValid(datestring){
 		return (date.isValid(datestring,"YYYY-MM-DD"));
 	}
 
