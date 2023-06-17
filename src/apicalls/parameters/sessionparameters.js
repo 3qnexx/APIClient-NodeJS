@@ -9,7 +9,7 @@ class SessionParameters extends Parameters{
     }
 
     setLanguage(language){
-		if((language)&&(language.lenth==2)){
+		if((language)&&(language.length==2)){
 			this.set('explicitLanguage',language.toLowerCase());
 		}
 	}
@@ -43,7 +43,7 @@ class SessionParameters extends Parameters{
 	}
 
 	setPortal(portal){
-		this.set('portal',$portal);
+		this.set('portal',portal);
 	}
 
 	setLinkOrigin(origin){

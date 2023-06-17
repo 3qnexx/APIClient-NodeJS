@@ -2,11 +2,12 @@
 
 const {APICall}=require("../internals/apicall");
 const {StatisticParameters}=require("./parameters/statisticparameters");
-const tools=require("../internals/tools");
+const {Tools}=require("../internals/tools");
 const streamtypes=require("../enums/streamtypes");
 const registrationproviders=require("../enums/registrationproviders");
 const revenuetypes=require("../enums/revenuetypes");
 const subscriptionterminationreasons=require("../enums/subscriptionterminationreasons");
+const statistictimescales=require("../enums/statistictimescales");
 const kpis=require("../enums/kpis");
 const date = require('date-and-time');
 
@@ -18,7 +19,7 @@ class StatisticsCall extends APICall{
 		this._parameters=new StatisticParameters();
 		this.setStreamtype(streamtype);
 		let now = new Date();
-		this.setDates(date.format(date.addDays(now,-30),"YYYY-MM-DD"),date.format(date.addDays(now,-1),"YYYY-MM-DD"));
+		this.setDates(date.format(date.addDays(now,-30,true),"YYYY-MM-DD"),date.format(date.addDays(now,-1,true),"YYYY-MM-DD"));
     }
 
 	#timeframeIsValid(timeframe){
@@ -34,27 +35,27 @@ class StatisticsCall extends APICall{
 	}
 
 	setDates(from,to){
-		if(tools.dateIsValid(from)){
+		if(Tools.dateIsValid(from)){
 			this.getParameters().setFrom(from);
 		}else{
 			throw new Error("from must be in YYYY-MM-DD format");
 		}
-		if(tools.dateIsValid(to)){
+		if(Tools.dateIsValid(to)){
 			this.getParameters().setTo(to);
 		}else{
 			throw new Error("to must be in YYYY-MM-DD format");
 		}
 	}
 
-	displayByDay(){
-		this._path+="displaysbyday";
+	displayBy(scale=statistictimescales.DAY){
+		this._path+="displaysby"+scale;
 	}
 
-	playerStartsByDay(){
-		this._path+="playerstartsbyday";
+	playerStartsBy(scale=statistictimescales.DAY){
+		this._path+="playerstartsby"+scale;
 	}
 
-	viewsByDay(){
+	viewsBy(scale=statistictimescales.DAY){
 		this._path+="viewsbyday";
 	}
 
@@ -74,28 +75,28 @@ class StatisticsCall extends APICall{
 		this._path+="viewprogressbyday";
 	}
 
-	downloadsByDay(){
-		this._path+="downloadsbyday";
+	downloadsBy(scale=statistictimescales.DAY){
+		this._path+="downloadsby"+scale;
 	}
 
-	clicksByDay(){
-		this._path+="viewsbyday";
+	clicksBy(scale=statistictimescales.DAY){
+		this._path+="viewsby"+scale;
 	}
 
-	adRequestsByDay(){
-		this._path+="adrequestsbyday";
+	adRequestsBy(scale=statistictimescales.DAY){
+		this._path+="adrequestsby"+scale;
 	}
 
-	adImpressionsByDay(){
-		this._path+="adimpressionsbyday";
+	adImpressionsBy(scale=statistictimescales.DAY){
+		this._path+="adimpressionsby"+scale;
 	}
 
-	adClicksByDay(){
-		this._path+="adclicksbyday";
+	adClicksBy(scale=statistictimescales.DAY){
+		this._path+="adclicksby"+scale;
 	}
 
-	adErrorsByDay(){
-		this._path+="aderrorsbyday";
+	adErrorsBy(scale=statistictimescales.DAY){
+		this._path+="aderrorsby"+scale;
 	}
 
 	loginsByDay(provider=""){
@@ -122,7 +123,7 @@ class StatisticsCall extends APICall{
 
 	revenueByDay(type=""){
 		this._path+="revenuebyday";
-		if(!empty($type)){
+		if(type){
 			if(revenuetypes.getAllTypes().includes(type)){
 				this.getParameters().set("type",type);
 			}else{

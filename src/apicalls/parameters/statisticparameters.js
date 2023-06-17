@@ -87,12 +87,12 @@ class StatisticParameters extends Parameters{
 		this.set('limit',Math.min(limit,defaults.MAX_RESULT_LIMIT_STATISTICS));
 	}
 
-	restrictToDeliveryPartner(parter){
-		this.set('deliveryPartner',parter);
+	restrictToDeliveryPartner(partner){
+		this.set('deliveryPartner',partner);
 	}
 
-	restrictToAffiliatePartner(parter){
-		this.set('affiliatePartner',parter);
+	restrictToAffiliatePartner(partner){
+		this.set('affiliatePartner',partner);
 	}
 
 	restrictToCampaign(campaign){
