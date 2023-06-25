@@ -7,7 +7,8 @@ const types={
 	TV:'tv',
 	WATCH:'watch',
 	SMART:'smart',
-	CAR:'car'
+	CAR:'car',
+	VR:'vr'
 };
 
 function getAllTypes(){
