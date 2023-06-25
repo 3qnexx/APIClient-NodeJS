@@ -4,6 +4,7 @@ const types={
 	PC:'pc',
 	MOBILE:'mobile',
 	TABLET:'tablet',
+	FOLDABLE:'foldable',
 	TV:'tv',
 	WATCH:'watch',
 	SMART:'smart',
