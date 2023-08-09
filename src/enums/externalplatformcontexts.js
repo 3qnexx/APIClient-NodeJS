@@ -3,7 +3,8 @@
 const types={
 	DEFAULT:'default',
 	REEL:'reel',
-	SHORT:'short'
+	SHORT:'short',
+	STORY:'story'
 };
 
 function getAllTypes(){

@@ -283,7 +283,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createLiveStreamFromRemote(hlsURL,dashURL="",title="",type=livestreamtypes.EVENT){
+	createLiveStreamFromRemote(hlsURL,dashURL="",title="",type=livestreamtypes.EVENT,supportsDVR=false,supportsLiveLatency=false){
 		if((hlsURL)&&(hlsURL.startsWith("http"))){
 			this.setStreamtype(streamtypes.LIVE);
 			this._verb=defaults.VERB_POST;
@@ -297,6 +297,12 @@ class MediaManagementCall extends APICall{
 			}
 			if(livestreamtypes.getAllTypes().includes(type)){
 				this.getParameters().set("type",type);
+			}
+			if(supportsDVR){
+				this.getParameters().set("supportsDVR",1);
+			}
+			if(supportsLiveLatency){
+				this.getParameters().set("supportsLiveLatency",1);
 			}
 		}else{
 			throw new Error("a valid HLS URL must be given.");
@@ -331,20 +337,26 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createRadioFromRemote(url,title="",type=livestreamtypes.EVENT){
-		if((url)&&(url.startsWith('http'))){
+	createRadioFromRemote(mp3URL,title="",type=livestreamtypes.EVENT,aacURL=null,opusURL=null){
+		if((mp3URL)&&(mp3URL.startsWith('http'))){
 			this.setStreamtype(streamtypes.RADIO);
 			this._verb=defaults.VERB_POST;
 			this.#method="fromremote";
-			this.getParameters().set("url",url);
+			this.getParameters().set("mp3URL",mp3URL);
 			if(title){
 				this.getParameters().set("title",title);
 			}
 			if(livestreamtypes.getAllTypes().includes(type)){
 				this.getParameters().set("type",type);
 			}
+			if(aacURL){
+				this.getParameters().set("aacURL",aacURL);
+			}
+			if(opusURL){
+				this.getParameters().set("opusURL",opusURL);
+			}
 		}else{
-			throw new Error("a valid URL must be given.");
+			throw new Error("a valid MP3 URL must be given.");
 		}
 	}
 
