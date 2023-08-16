@@ -6,7 +6,6 @@ const types={
 	TABLET:'tablet',
 	CAR:'car',
 	AMP:'amp',
-	FBIA:'fbia',
 	IOS:'ios',
 	ANDROID:'android',
 	SMARTTV:'smarttv',
