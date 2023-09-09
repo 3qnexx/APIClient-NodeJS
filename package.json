@@ -14,7 +14,7 @@
     "url": "https://github.com/3qnexx/APIClient-NodeJS"
   },
   "homepage": "https://api.docs.nexx.cloud/",
-  "author": "3Q nexx GmbH",
+  "author": "3Q GmbH",
   "license": "ISC",
   "main": "apiclient.js",
   "engines": {
