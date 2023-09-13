@@ -887,7 +887,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	addItemDownloadLink(title,language="",maxStarts=0,code="",useDomainStyle=false){
+	addItemDownloadLink(title,language="",maxStarts=0,code="",useDomainStyle=false,includeTextTracks=false){
 		if(streamtypes.getDownloadLinkTypes().includes(this.#streamtype)){
 			this._verb=defaults.VERB_POST;
 			this.#method="adddownloadlink";
@@ -905,6 +905,9 @@ class MediaManagementCall extends APICall{
 			}
 			if(useDomainStyle){
 				this.getParameters().set("useDomainStyle",1);
+			}
+			if(includeTextTracks){
+				this.getParameters().set("includeTextTracks",1);
 			}
 		}else{
 			throw new Error("Streamtype must be in "+streamtypes.getUploadableTypes().join(","));
