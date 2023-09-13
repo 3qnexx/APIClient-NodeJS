@@ -887,7 +887,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	addItemDownloadLink(title,language="",maxStarts=0,code="",useDomainStyle=false,includeTextTracks=false){
+	addItemDownloadLink(title,language="",maxStarts=0,code="",useDomainStyle=false,includeTextTracks=true){
 		if(streamtypes.getDownloadLinkTypes().includes(this.#streamtype)){
 			this._verb=defaults.VERB_POST;
 			this.#method="adddownloadlink";
