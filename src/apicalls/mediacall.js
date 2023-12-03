@@ -100,6 +100,10 @@ class MediaCall extends APICall{
 		this._method="forkids";
 	}
 
+	withAwards(){
+		this._method="withwards";
+	}
+
 	random(){
 		this._method="random";
 	}
