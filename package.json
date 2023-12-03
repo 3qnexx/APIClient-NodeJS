@@ -14,7 +14,7 @@
     "url": "https://github.com/3qnexx/APIClient-NodeJS"
   },
   "homepage": "https://api.docs.nexx.cloud/",
-  "author": "3Q nexx GmbH",
+  "author": "3Q GmbH",
   "license": "ISC",
   "main": "apiclient.js",
   "engines": {
@@ -22,8 +22,8 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@azure/storage-blob": "^12.14.0",
-    "date-and-time": "^3.0.1",
+    "@azure/storage-blob": "^12.17.0",
+    "date-and-time": "^3.0.3",
     "path": "^0.12.7"
   }
 }

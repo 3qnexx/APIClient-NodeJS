@@ -6,13 +6,21 @@ const types={
 	TABLET:'tablet',
 	CAR:'car',
 	AMP:'amp',
-	FBIA:'fbia',
 	IOS:'ios',
 	ANDROID:'android',
 	SMARTTV:'smarttv',
 	ANDROIDTV:'androidtv',
-	ANDROIDCAR:'androidcar',
-	podcast:'podcast'
+	CHROMECAST:'chromecast',
+	ANDROIDCAR:'androidauto',
+	CARPLAY:'carplay',
+	PODCAST:'podcast',
+	WATCH:'watch',
+	VR:'vr',
+	XBOX:'xbox',
+	PLAYSTATION:'playstation',
+	WINDOWS:'windows',
+	MACOS:'macos',
+	CHROMEOS:'chromeos'
 };
 
 function getAllTypes(){
