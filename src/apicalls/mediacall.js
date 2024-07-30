@@ -134,26 +134,6 @@ class MediaCall extends APICall{
 		this._method="topitemsexternal";
 	}
 
-	bestRated(timeFrame=5){
-		this._method="bestrated";
-		this.getParameters().set("timeframe",timeFrame);
-	}
-
-	mostLiked(timeFrame=5){
-		this._method="mostliked";
-		this.getParameters().set("timeframe",timeFrame);
-	}
-
-	mostReacted(timeFrame=5){
-		this._method="mostreacted";
-		this.getParameters().set("timeframe",timeFrame);
-	}
-
-	mostCommented(timeFrame=5){
-		this._method="mostcommented";
-		this.getParameters().set("timeframe",timeFrame);
-	}
-
 	channelOverview(){
 		this._method="channeloverview";
 	}
