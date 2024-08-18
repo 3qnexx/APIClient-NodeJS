@@ -190,7 +190,6 @@ class APIClient{
                     let aresult=new APIResult(aresponse);
                     if(aresult.isSuccess()){
                         result.addResults(aresult.getResult(),aresult.getMetaData().getProcessingTime());
-                        result.update
                         if((aresult.supportsPaging())&&(aresult.getPaging().hasMoreResults())){
                             start+=defaults.MAX_RESULT_LIMIT;
                         }else{
