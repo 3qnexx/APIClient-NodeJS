@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+1.6.3 (2024-08-18)
+-------------------
+
+* adding Threads as valid external Platform Provider
+
 1.6.2 (2024-07-30)
 -------------------
 

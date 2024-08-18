@@ -3,8 +3,7 @@
 const types={
 	FACEBOOK:'facebook',
 	INSTAGRAM:'instagram',
-	TWITTER:'twitter',
-	VIMEO:'vimeo',
+	THREADS:'threads',
 	YOUTUBE:'youtube',
 	TIKTOK:'tiktok',
 	LINKEDIN:'linkedin',

@@ -3,7 +3,7 @@
 const types={
     FACEBOOK:'facebook',
     GOOGLE:'google',
-    TWITTER:'twitter',
+    APPLE:'apple',
     AAD:'aad'
 };
 
