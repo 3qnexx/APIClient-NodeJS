@@ -34,10 +34,6 @@ class SystemCall extends APICall{
 		this._path+="facebookcategories";
 	}
 
-	rokuCategories(){
-		this._path+="rokucategories";
-	}
-
 	countryCodes(){
 		this._path+="countrycodes";
 	}
