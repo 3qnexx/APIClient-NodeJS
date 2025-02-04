@@ -39,6 +39,10 @@ class MediaModifiers extends Modifiers{
 		this._params['addAwards']=1;
 	}
 
+	addHTMLTexts(){
+		this._params['addHTMLTexts']=1;
+	}
+
 	addFaceDetails(){
 		this._params['addFaceDetails']=1;
 	}
@@ -139,8 +143,8 @@ class MediaModifiers extends Modifiers{
 		this._params['addPaymentData']=1;
 	}
 
-	addTranslations(){
-		this._params['addTranslations']=1;
+	addMultiLanguageData(){
+		this._params['addMultiLanguageData']=1;
 	}
 
 	addCustomAttributes(){
