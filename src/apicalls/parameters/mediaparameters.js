@@ -233,6 +233,14 @@ class MediaParameters extends Parameters{
 		this.set('includeRemote',(include?1:0));
 	}
 
+	includeAIGenerated(include,onlyAIGenerated=false){
+		if(onlyAIGenerated){
+			include=1;
+			this.set('onlyAIGenerated',1);
+		}
+		this.set('includeAIGenerated',(include?1:0));
+	}
+
 	includePay(onlyFree=false,onlyPayed=false,onlyPremium=false,onlyStandard=false){
 		if(onlyFree){
 			this.set('onlyFree',1);
