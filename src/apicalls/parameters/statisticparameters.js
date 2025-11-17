@@ -135,8 +135,8 @@ class StatisticParameters extends Parameters{
 		}
 	}
 
-	restrictToRegion(region){
-		this.set('regionCode',region);
+	restrictToSubdivision(subdivision){
+		this.set('subdivisionCode',subdivision);
 	}
 
 	restrictToManufacturer(manufacturer){

@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+1.6.8 (2025-11-17)
+-------------------
+
+* the Support for "Geo Regions" in Files and Statistics has been changed. The previous "Region" Attribute was renamed to "Subdivision" (and also, its type and Structure has been changed)
+
 1.6.7 (2025-03-26)
 -------------------
 

@@ -42,12 +42,6 @@ class SystemCall extends APICall{
 		this._path+="languagecodes";
 	}
 
-	regionCodesForCountry(country){
-		if((country)&&(country.length==2)){
-			this._path+="regioncodesfor/"+country;
-		}
-	}
-
 	personTypes(){
 		this._path+="persontypes";
 	}

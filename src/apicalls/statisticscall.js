@@ -19,7 +19,7 @@ class StatisticsCall extends APICall{
 		this._parameters=new StatisticParameters();
 		this.setStreamtype(streamtype);
 		let now = new Date();
-		this.setDates(date.format(date.addDays(now,-30,true),"YYYY-MM-DD"),date.format(date.addDays(now,-1,true),"YYYY-MM-DD"));
+		this.setDates(date.format(date.addDays(now,-30),"YYYY-MM-DD"),date.format(date.addDays(now,-1),"YYYY-MM-DD"));
     }
 
 	#timeframeIsValid(timeframe){
