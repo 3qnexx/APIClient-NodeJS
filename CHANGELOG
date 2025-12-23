@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+1.6.9 (2025-12-22)
+-------------------
+
+* adding Support for the new transcodeInBackground Parameter when importing Video/Audio via API
+
+
 1.6.8 (2025-11-17)
 -------------------
 

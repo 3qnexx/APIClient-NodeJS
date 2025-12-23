@@ -88,7 +88,7 @@ class MediaManagementCall extends APICall{
 		}
 	}
 
-	createFromURL(url, autoPublish=null, refnr="",origin="", originReference="",asVariantFor="", asVariantOf=0, sourceLanguage="", notes="",useQueue=true, queueStart=0){
+	createFromURL(url, autoPublish=null, refnr="",origin="", originReference="",asVariantFor="", asVariantOf=0, sourceLanguage="", notes="",useQueue=true, queueStart=0, transcodeInBackground=false){
 		if(streamtypes.getUploadableTypes().includes(this.#streamtype)){
 			if(url.startsWith("http")){
 				this._verb=defaults.VERB_POST;
@@ -116,6 +116,7 @@ class MediaManagementCall extends APICall{
 					this.getParameters().set('autoPublish',(autoPublish?1:0));
 				}
 				if((this.#streamtype==streamtypes.VIDEO)||(this.#streamtype==streamtypes.AUDIO)){
+					this.getParameters().set("transcodeInBackground",transcodeInBackground?1:0);
 					if((sourceLanguage)&&(sourceLanguage.length==2)){
 						this.getParameters().set("language",sourceLanguage);
 					}

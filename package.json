@@ -1,6 +1,6 @@
 {
   "name": "nexxomnia-api-nodejs",
-  "version": "1.6.8",
+  "version": "1.6.9",
   "description": "The nexxOMNIA API Client for NodeJS",
   "keywords": [
     "3q",
@@ -18,12 +18,11 @@
   "license": "ISC",
   "main": "apiclient.js",
   "engines": {
-    "npm": ">=9.0.0",
-    "node": ">=20.0.0"
+    "node": "^20.19.0 || >=22.12.0"
   },
   "dependencies": {
     "@azure/storage-blob": "^12.29.1",
-    "date-and-time": "^4.1.1",
+    "date-and-time": "^4.1.2",
     "path": "^0.12.7"
   }
 }
