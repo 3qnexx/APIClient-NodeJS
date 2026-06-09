@@ -262,6 +262,10 @@ class MediaParameters extends Parameters{
 		this.set('includeInvalidChildMedia',(include?1:0));
 	}
 
+	includeTeamRestrictedMedia(include){
+		this.set('includeTeamRestrictedMedia',(include?1:0));
+	}
+
 	includeTrailers(include,onlyTrailers=false){
 		if(onlyTrailers){
 			include=1;
