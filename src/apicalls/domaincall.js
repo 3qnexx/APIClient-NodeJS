@@ -10,7 +10,7 @@ class DomainCall extends APICall{
 		this._path="domain/";
     }
 
-	publicInfo(addCustomAttributes,addChannels,addFormats){
+	publicInfo(addCustomAttributes,addChannels,addFormats,addMediaInitialization){
 		this._path+="publicinfo";
 		if(addCustomAttributes){
 			this.getParameters().set("addCustomAttributes",1);
@@ -20,6 +20,9 @@ class DomainCall extends APICall{
 		}
 		if(addFormats){
 			this.getParameters().set("addFormats",1);
+		}
+		if(addMediaInitialization){
+			this.getParameters().set("addMediaInitialization",1);
 		}
 	}
 
@@ -173,7 +176,12 @@ class DomainCall extends APICall{
 		this._path+="systemusers";
 	}
 
-	networkDomains(addChannels=false,addFormats=false,addVideoCategories=false,addAudioCategories=false,addImageCategories=false,addFileCategories=false,addArticleCategories=false,addEventCategories=false,addPlaceCategories=false,addProductCategories=false,addAccounts=false,addLiveConnections=false,addAutoUpdateFeeds=false,addTags=false,addCustomAttributes=false){
+	mediaInitialization(){
+		this._path+="mediainitialization";
+	}
+
+
+	networkDomains(addChannels=false,addFormats=false,addVideoCategories=false,addAudioCategories=false,addImageCategories=false,addFileCategories=false,addArticleCategories=false,addEventCategories=false,addPlaceCategories=false,addProductCategories=false,addAccounts=false,addLiveConnections=false,addAutoUpdateFeeds=false,addTags=false,addCustomAttributes=false,addMediaInitialization=false){
 		this._path+="networkdomains";
 		if(addChannels){
 			this.getParameters().set("addChannels",1);
@@ -219,6 +227,9 @@ class DomainCall extends APICall{
 		}
 		if(addCustomAttributes){
 			this.getParameters().set("addCustomAttributes",1);
+		}
+		if(addMediaInitialization){
+			this.getParameters().set("addMediaInitialization",1);
 		}
 	}
 
